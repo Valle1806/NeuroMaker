@@ -1,0 +1,153 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+#espacio {
+    position: relative;
+    padding-bottom: 90px;
+}
+
+.card-1 {
+    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    width: 820px;
+    display: table;
+}
+
+.card-1 .card-heading {
+    background: #344955;
+    width: 50%;
+    display: table-cell;
+}
+
+.card-1 .card-heading #mundo {
+    height: 335px;
+    width: 335px;
+   /* background: url("../imagenes/mundo.png") top center/cover no-repeat;*/
+    background-size: auto auto;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 90px;
+    -webkit-animation: spin 6s infinite linear;
+    /* Animación y Tiempo que tarda en girar */
+    -moz-animation: spin 6s infinite linear;
+    animation: spin 15s infinite linear;
+}
+
+.card-1 .card-heading #taxi {
+    height: 76px;
+    width: 167px;
+   /* background: url("../imagenes/taxi.png") top center/cover no-repeat;*/
+    background-size: auto auto;
+    position: absolute;
+    margin-left: 125px;
+    margin-top: 100px;
+    animation: 3s latido infinite;
+}
+
+.card-1 .card-heading #mundo {
+    height: 335px;
+    width: 335px;
+   /* background: url("../imagenes/mundo.png") top center/cover no-repeat;*/
+    background-size: auto auto;
+    position: absolute;
+    margin-left: 40px;
+    margin-top: 90px;
+    -webkit-animation: spin 6s infinite linear;
+    /* Animación y Tiempo que tarda en girar */
+    -moz-animation: spin 6s infinite linear;
+    animation: spin 15s infinite linear;
+}
+
+.card-1 .card-heading #taxi {
+    height: 76px;
+    width: 167px;
+   /* background: url("../imagenes/taxi.png") top center/cover no-repeat;*/
+    background-size: auto auto;
+    position: absolute;
+    margin-left: 125px;
+    margin-top: 100px;
+    animation: 3s latido infinite;
+}
+
+.card {
+    max-width: 90%;
+    overflow: hidden;
+    margin: 0 auto;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+@keyframes latido {
+    35% {
+        margin-top: 100px;
+    }
+    43% {
+        margin-top: 93px;
+    }
+    51% {
+        margin-top: 100px;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(360deg)
+    }
+    to {
+        transform: rotate(0deg)
+    }
+}
+
+#formularioLogin {
+    margin: 0 auto;
+    position: relative;
+    max-width: 30px!important;
+    text-align: center;
+    background: #fff;
+}
+
+#formularioLogin {
+    display: table-cell;
+    padding: 40px 50px;
+}
+
+#formularioLogin span {
+    color: #344955
+}
+.form-group .form-control {
+    padding-left: 40px;
+}
+
+.form-group i {
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    font-size: 15px;
+    color:#344955
+}
+
+.btn-danger {
+    background-color: #d11736;
+}
+
+@media screen and (max-width: 840px) {
+    .card {
+        max-width: 95%;
+        margin: 0 auto;
+        margin-bottom: 50px;
+    }
+    .card-1 {
+        width: 100%;
+    }
+    .card-2 .card-heading,
+    .card-1 .card-heading {
+        width: 0%;
+        display: none;
+    }
+}
