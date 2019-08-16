@@ -1,4 +1,4 @@
-﻿
+
 -- USUARIO -------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS usuario CASCADE;
 CREATE TABLE usuario(
@@ -9,10 +9,18 @@ CREATE TABLE usuario(
 	codigo_postal VARCHAR(50) NOT NULL,
 	tarjeta VARCHAR(50) NOT NULL,
 	correo VARCHAR(50) NOT NULL,
-	estado BIT(1) NOT NULL DEFAULT B'1',
+	estado INTEGER NOT NULL DEFAULT 1,
 	comision INTEGER NOT NULL,
 
 	CONSTRAINT usuario_pk PRIMARY KEY (cedula)
+);
+
+-- CATEGORIA ------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS categoria CASCADE;
+CREATE TABLE categoria(
+	id SERIAL NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
+	CONSTRAINT categoria_pk PRIMARY KEY (id)
 );
 
 -- PRODUCTO ------------------------------------------------------------------------------------------
@@ -22,14 +30,15 @@ CREATE TABLE producto(
 	nombre VARCHAR(50) NOT NULL,
 	imagen VARCHAR(200) NOT NULL,
 	descripcion VARCHAR(500) NOT NULL,
-	categoria VARCHAR(50) NOT NULL,
+	categoria INTEGER NOT NULL,
 	costo INTEGER NOT NULL DEFAULT 0,
 	descuento INTEGER NOT NULL DEFAULT 0,
 	id_vendedor VARCHAR(50) NOT NULL, 
 	existencias INTEGER NOT NULL DEFAULT 0,
 
 	CONSTRAINT producto_pk PRIMARY KEY (id),
-	CONSTRAINT producto_fk FOREIGN KEY (id_vendedor) REFERENCES usuario (cedula) ON DELETE CASCADE
+	CONSTRAINT producto_fk1 FOREIGN KEY (id_vendedor) REFERENCES usuario (cedula) ON DELETE CASCADE,
+	CONSTRAINT producto_fk2 FOREIGN KEY (categoria) REFERENCES categoria (id) ON DELETE CASCADE
 );
 
 -- CALIFICACION --------------------------------------------------------------------------------------
@@ -40,7 +49,8 @@ CREATE TABLE calificacion(
 	calificacion INTEGER NOT NULL DEFAULT 0,
 
 	CONSTRAINT calificacion_pk PRIMARY KEY (id_producto, id_autor),
-	CONSTRAINT calificacion_fk FOREIGN KEY (id_autor) REFERENCES usuario (cedula) ON DELETE CASCADE
+	CONSTRAINT calificacion_fk1 FOREIGN KEY (id_producto) REFERENCES producto (id) ON DELETE CASCADE,
+	CONSTRAINT calificacion_fk2 FOREIGN KEY (id_autor) REFERENCES usuario (cedula) ON DELETE CASCADE
 );	
 
 -- CARRITO -------------------------------------------------------------------------------------------
@@ -93,14 +103,24 @@ CREATE TABLE comentario(
 	CONSTRAINT comentario_fk2 FOREIGN KEY (id_autor) REFERENCES usuario (cedula) ON DELETE CASCADE
 );
 
+-- ESTADO ENVIO -------------------------------------------------------------------------------------------
+DROP TABLE IF EXISTS estado_envio CASCADE;
+CREATE TABLE estado_envio(
+	id SERIAL NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
+	CONSTRAINT estado_envio_pk PRIMARY KEY (id)
+
+);
+
 -- ENVIO -------------------------------------------------------------------------------------------
 DROP TABLE IF EXISTS envio CASCADE;
 CREATE TABLE envio(
 	id_venta INTEGER NOT NULL,
-	estado VARCHAR(50) NOT NULL DEFAULT 'En camino',
+	estado INTEGER NOT NULL DEFAULT 1,
 
 	CONSTRAINT envio_pk PRIMARY KEY (id_venta),
-	CONSTRAINT envio_fk FOREIGN KEY (id_venta) REFERENCES venta (id) ON DELETE CASCADE
+	CONSTRAINT envio_fk1 FOREIGN KEY (id_venta) REFERENCES venta (id) ON DELETE CASCADE,
+	CONSTRAINT envio_fk2 FOREIGN KEY (estado) REFERENCES estado_envio (id) ON DELETE CASCADE
 );
 	
 -- INSERTS ----------------------------------------------------------------------------------------------------------------------
@@ -112,21 +132,29 @@ INSERT INTO usuario (cedula,clave,nombre,direccion,codigo_postal,tarjeta,correo,
 	('1144208998','2222','Christian Taborda','Ulpiano Lloreda','760007','1595351648960231','christian@correo.com',30),
 	('1151957133','3333','Sebastían Afanador','Meléndez','760003','3456817154980205','sebastian@correo.com',15);
 
+-- CATEGORIAS --------------------------------------------------------------------------------------------------------------------
+INSERT INTO categoria(nombre) VALUES
+	('Videojuegos'),('Vehiculos'),('Ropa'),('Libros'),
+	('Electrodomesticos'),('Alimentos'),('Medicinas'),('Muebles'),
+	('Otros'),('Herramientas');
+
 -- PRODUCTOS --------------------------------------------------------------------------------------------------------------------
 INSERT INTO producto (nombre,imagen,descripcion,categoria,costo,descuento,id_vendedor,existencias) VALUES
-	('Xbox One','imagen','Consola Xbox One nueva en color blanco con 500GB y un control','Videojuegos',900000,0,'1144208998',2),
-	('Honda Civic','imagen','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)','Vehículos',43000000,15,'1144182479',1),
-	('Gorra Nike','imagen','Gorra color gris marca Nike','Ropa',18000,10,'1143992392',20),
-	('Spiderman PS4','imagen','Videojuego de Spiderman para la consola PS4','Videojuegos',200000,10,'1144208998',3),
-	('Las manchas del leopardo','imagen','Libro sobre la evolución de la complejidad del autor Brian Goodwin','Libros',30000,0,'1144208998',5),
-	('Televisor Samsung','imagen','Televisor SMART TV Samsung 49 pulgadas','Electrodomésticos',1400000,15,'1151957133',1),
-	('Brownies Bimbo','imagen','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)','Alimentos',12000,0,'1144182479',8),
-	('Lavadora LG Turbodrum','imagen','Lavadora LG Turbodrum con 12 kg de capacidad','Electrodomésticos',1100000,25,'1151957133',2),
-	('Sevedol Extrafuerte','imagen','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza','Medicinas',24900,0,'1143992392',10),
-	('Escritorio Ermes','imagen','Escritorio Ermes color chocolate','Muebles',170000,10,'1143992392',1),
-	('Juego de mancuernas','imagen','Juego de mancuernas de 70 LBS','Otros',135000,0,'1151957133',5),
-	('Caja de herramientas CAT Premium','imagen','Caja de herramientas portátil de plástico marca CAT','Herramientas',280000,5,'1151957133',3);
+	('Xbox One','imagen','Consola Xbox One nueva en color blanco con 500GB y un control',1,900000,0,'1144208998',2),
+	('Honda Civic','imagen','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)',2,43000000,15,'1144182479',1),
+	('Gorra Nike','imagen','Gorra color gris marca Nike',3,18000,10,'1143992392',20),
+	('Spiderman PS4','imagen','Videojuego de Spiderman para la consola PS4',1,200000,10,'1144208998',3),
+	('Las manchas del leopardo','imagen','Libro sobre la evolución de la complejidad del autor Brian Goodwin',4,30000,0,'1144208998',5),
+	('Televisor Samsung','imagen','Televisor SMART TV Samsung 49 pulgadas',5,1400000,15,'1151957133',1),
+	('Brownies Bimbo','imagen','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)',6,12000,0,'1144182479',8),
+	('Lavadora LG Turbodrum','imagen','Lavadora LG Turbodrum con 12 kg de capacidad',5,1100000,25,'1151957133',2),
+	('Sevedol Extrafuerte','imagen','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza',7,24900,0,'1143992392',10),
+	('Escritorio Ermes','imagen','Escritorio Ermes color chocolate',8,170000,10,'1143992392',1),
+	('Juego de mancuernas','imagen','Juego de mancuernas de 70 LBS',9,135000,0,'1151957133',5),
+	('Caja de herramientas CAT Premium','imagen','Caja de herramientas portátil de plástico marca CAT',10,280000,5,'1151957133',3);
 	
-	
+
+-- ESTADO_ENVIO --------------------------------------------------------------------------------------------------------------------
+INSERT INTO estado_envio (nombre) VALUES ('En camino');
 	
 	

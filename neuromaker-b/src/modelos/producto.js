@@ -1,9 +1,10 @@
-import Sequelize from 'sequelize';
-import {
-    sequelize
-} from '../baseDatos/baseDatos';
+import Sequelize from 'sequelize'
+import { sequelize } from '../baseDatos/baseDatos'
+import { Detalle_venta } from './detalle_venta';
+import { Calificacion } from './calificacion';
+import { Comentario } from './comentario';
 
-const Producto = sequelize.define('producto', {
+export const Producto = sequelize.define('producto', {
     id: {
         type: Sequelize.INTEGER,
         notNull: true,
@@ -22,7 +23,7 @@ const Producto = sequelize.define('producto', {
         notNull: true
     },
     categoria: {
-        type: Sequelize.STRING(50),
+        type: Sequelize.INTEGER,
         notNull: true
     },
     costo: {
@@ -48,7 +49,10 @@ const Producto = sequelize.define('producto', {
 
 }, {
     freezeTableName: true,
-    timestamps: false
+    timestamps: true
 });
 
-export default Producto;
+
+Producto.hasMany(Calificacion,{foreignKey:'id_producto'})
+Producto.hasMany(Detalle_venta,{foreignKey:'id_producto'})
+Producto.hasMany(Comentario,{foreignKey:'id_producto'})

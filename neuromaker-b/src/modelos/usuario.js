@@ -1,10 +1,13 @@
-import Sequelize from 'sequelize';
-import {
-    sequelize
-} from '../baseDatos/baseDatos';
+import Sequelize from 'sequelize'
+import { sequelize } from '../baseDatos/baseDatos'
+import { Producto } from './producto'
+import { Calificacion } from './calificacion'
+import { Carrito } from './carrito';
+import { Venta } from './venta';
+import { Detalle_venta } from './detalle_venta';
+import { Comentario } from './comentario';
 
-
-const Usuario = sequelize.define('usuario', {
+export const Usuario = sequelize.define('usuario', {
     cedula: {
         type: Sequelize.STRING(50),
         notNull: true,
@@ -35,8 +38,9 @@ const Usuario = sequelize.define('usuario', {
         notNull: true
     },
     estado: {
-        type: Sequelize.BOOLEAN,
-        notNull: true
+        type: Sequelize.INTEGER,
+        notNull: true,
+        defaultValue: 1
     },
     comision: {
         type: Sequelize.INTEGER,
@@ -45,7 +49,13 @@ const Usuario = sequelize.define('usuario', {
 
 }, {
     freezeTableName: true,
-    timestamps: false
-});
+    timestamps: true
+})
 
-export default Usuario;
+Usuario.hasMany(Producto,{foreignKey:'id_vendedor'})
+Usuario.hasMany(Calificacion,{foreignKey:'id_autor'})
+Usuario.hasOne(Carrito,{foreignKey:'id_comprador'})
+Usuario.hasOne(Carrito,{foreignKey:'id_vendedor'})
+Usuario.hasMany(Venta,{foreignKey:'id_comprador'})
+Usuario.hasMany(Detalle_venta,{foreignKey:'id_vendedor'})
+Usuario.hasMany(Comentario,{foreignKey:'id_autor'})
