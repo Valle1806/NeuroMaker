@@ -17,11 +17,7 @@ class App extends Component {
         super(props)
         this.state = {
             clienteLogueado: false,
-            productos: [
-                {
-                 nombre: ''
-                } 
-            ]
+            
             
         };
         this.handleChangeClienteLog = this.handleChangeClienteLog.bind(this)
@@ -33,17 +29,7 @@ class App extends Component {
         })
     }
 
-    componentWillMount() {
-       //Axios se encarga de hacer solicitudes de forma sencilla
-      axios.post('http://localhost:4000/producto/traer')
-      .then((response) => {
-        if(response.data.mensaje==="Producto encontrado"){
-            console.log("holaluliugyk")
-          this.setState({productos:response.data.data}) 
-        }
-
-      })
-    }
+   
 
 render(){
     
@@ -73,8 +59,7 @@ render(){
         textoBoton: "ACTUALIZAR"
     };
     const eleccion={
-        productos: this.state.productos,
-        escoger: 'nel',
+        eleccion: 'nel',
         login: this.state.clienteLogueado 
     }
 
