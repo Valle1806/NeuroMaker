@@ -1,7 +1,6 @@
-const Sequelize = require('sequelize'),
-{sequelize} = require('../baseDatos/baseDatos'),
-Producto = require('./producto')
-
+import Sequelize from 'sequelize'
+import {sequelize} from '../baseDatos/baseDatos'
+import Producto from './producto'
 
 export const Categoria = sequelize.define('categoria',{
     id:{
@@ -13,6 +12,11 @@ export const Categoria = sequelize.define('categoria',{
         type:Sequelize.STRING,
         notNull: true
     }
+},{
+    freezeTableName: true,
+    timestamps: false
 })
 
-Categoria.hasMany(Producto, {foreignKey:'categoria'})
+Categoria.hasMany(Producto,{foreignKey:'categoria'})
+
+export default Categoria

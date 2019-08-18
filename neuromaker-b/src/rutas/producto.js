@@ -1,8 +1,10 @@
-import { Router } from 'express';
-import { traerProducto, registrarProducto } from '../controladores/dao.producto';
-const router = Router();
-// /usuario
-router.post('/traer', traerProducto);
-router.post('/registrar', registrarProducto);
+import { Router } from 'express'
+import { consultarProductos, registrarProducto, consultarProducto } from '../controladores/dao.producto'
 
-export default router;
+const router = Router()
+
+router.post('/consultarProductos', consultarProductos)
+router.post('/registrarProducto', registrarProducto)
+router.post('/consultarProducto/:id', consultarProducto)
+
+export default router

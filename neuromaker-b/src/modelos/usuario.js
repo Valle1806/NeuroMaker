@@ -49,7 +49,7 @@ export const Usuario = sequelize.define('usuario', {
 
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })
 
 Usuario.hasMany(Producto,{foreignKey:'id_vendedor'})

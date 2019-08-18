@@ -24,5 +24,5 @@ export const Detalle_venta = sequelize.define('detalle_venta', {
     }
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })

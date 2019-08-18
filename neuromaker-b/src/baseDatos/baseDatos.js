@@ -3,7 +3,7 @@ import Sequelize from 'sequelize';
 export const sequelize =new Sequelize(
     'postgres',   //nombre base de datos
     'postgres',    //nombre usuario
-    'root',        //contraseña
+    '',        //contraseña
     //configuraciones sequelize
     {
         host: 'localhost',

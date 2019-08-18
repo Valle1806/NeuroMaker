@@ -18,6 +18,9 @@ export const Venta = sequelize.define('venta',{
         notNull: true,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     },
+}, {
+    freezeTableName: true,
+    timestamps: false
 })
 
 Venta.hasMany(Detalle_venta,{foreignKey:'id_venta'})

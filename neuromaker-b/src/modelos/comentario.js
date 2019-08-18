@@ -20,5 +20,5 @@ export const Comentario = sequelize.define('comentario',{
     }
 },{
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 });

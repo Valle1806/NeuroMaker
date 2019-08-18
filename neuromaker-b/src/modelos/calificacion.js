@@ -19,5 +19,5 @@ export const Calificacion = sequelize.define('calificacion',{
     },
 },{
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })

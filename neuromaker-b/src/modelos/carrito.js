@@ -25,6 +25,6 @@ export const Carrito = sequelize.define('carrito', {
 
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 });
 

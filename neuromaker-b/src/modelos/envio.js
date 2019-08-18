@@ -12,5 +12,5 @@ export  const Envio = sequelize.define('envio',{
     }
 },{
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })

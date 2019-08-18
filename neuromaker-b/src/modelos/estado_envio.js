@@ -14,7 +14,7 @@ export const Estado_envio = sequelize.define('estado_envio',{
     }
 },{
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 })
 
 Estado_envio.hasMany(Envio,{foreignKey:'estado'})

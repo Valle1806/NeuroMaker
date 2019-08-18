@@ -49,10 +49,12 @@ export const Producto = sequelize.define('producto', {
 
 }, {
     freezeTableName: true,
-    timestamps: true
+    timestamps: false
 });
 
 
 Producto.hasMany(Calificacion,{foreignKey:'id_producto'})
 Producto.hasMany(Detalle_venta,{foreignKey:'id_producto'})
 Producto.hasMany(Comentario,{foreignKey:'id_producto'})
+
+export default Producto
