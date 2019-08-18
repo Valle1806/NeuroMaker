@@ -1,11 +1,11 @@
 import React from 'react'
 import imagen from '../imagenes/xboxOne.jpeg'
 
-
 const Producto = (props) =>{
     return(
         
-        <div className="product">
+    <div className="product" >
+        
             <div className="product-img">
             <img src={props.producto.imagen} className="App-logo" alt="logo" />
                 <div className="product-label">
@@ -16,7 +16,7 @@ const Producto = (props) =>{
             </div>
             <div className="product-body">
                 <p className="product-category">{props.producto.categoria}</p>
-                <h3 className="product-name"><a href="/#">{props.producto.nombre}</a></h3>
+                <h3 className="product-name"></h3>
                 <h4 className="product-price">{props.producto.costo} <del className="product-old-price">{//$990.00
                 }</del></h4>
                 <div className="product-rating">
@@ -33,7 +33,7 @@ const Producto = (props) =>{
             </div>
         </div>
 
-    )
+    );
 }
 
 export default Producto;

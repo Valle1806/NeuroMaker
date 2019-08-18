@@ -321,8 +321,8 @@ textarea.input {
 }
 
 .product .product-img>img {
-  width: 300px;
-  height: 300px;
+  width: 270px;
+  height: 270px;
 }
 
 .product .product-img .product-label {
@@ -1001,4 +1001,10 @@ input.numero{
 
 .texto{
   display: inline-block
+}
+
+.derecha-prod{
+  height: 300px;
+  width: 600px;
+  text-align: center;
 }

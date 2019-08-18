@@ -6,6 +6,7 @@ import Producto from './producto'
 import DetalleProducto from './detalle_ producto'
 import axios from 'axios'
 import { Spinner } from 'reactstrap';
+import {Route , Link } from 'react-router-dom'
 /*
 Los componentes con estado deben ser clases
 vea un ejemplo de componente sin estado en el
@@ -13,17 +14,22 @@ footer o header
 */
 
 
+
 const listaProductos = (arreglo) => (
+  arreglo.map(indice => (
+    <Link key={indice.nombre} to={`/detalle/${indice.costo}`} ><Producto producto ={indice} key={indice.nombre}/></Link>
+
+  ))
   
-  arreglo.map(indice => (<Producto producto ={indice} key={indice.nombre}/>))
-);
+  );
+
+
 
 class Main  extends React.Component {
   constructor(props){
     super(props);
     this.state={
       cargando: true,
-      caso: props.eleccion,
       productos: [
         {
           nombre:''
@@ -48,20 +54,6 @@ class Main  extends React.Component {
    })
   }
 
-  renderSwitch(param) {
-    switch(param) {
-      case 'detalle':
-        return(
-          <DetalleProducto/>
-        );
-      default:
-        return (
-          
-            listaProductos(this.state.productos)
-          
-        );
-    }
-  }
 
   render(){
     if(this.state.cargando){
@@ -86,7 +78,7 @@ class Main  extends React.Component {
         <div>
             <Header/>
             <main>
-              {this.renderSwitch(this.state.caso)}
+              { listaProductos(this.state.productos)}
             </main>
           <Footer/>
           </div>  

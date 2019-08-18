@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Main from './componentes/main'
-import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './componentes/header'
 import LoginCliente from './componentes/loginClient'
 import Regitro from './componentes/registroClient'
@@ -17,16 +17,20 @@ class App extends Component {
         super(props)
         this.state = {
             clienteLogueado: false,
-            
+            productoSeleccionado: ''
             
         };
         this.handleChangeClienteLog = this.handleChangeClienteLog.bind(this)
+        this.cambiarProdcutoSeleccionado= this.cambiarProdcutoSeleccionado.bind(this)
     }
 
     handleChangeClienteLog(valor){
         this.setState({
             clienteLogueado: valor
         })
+    }
+    cambiarProdcutoSeleccionado(valor){
+        this.setState({productoSeleccionado:valor})
     }
 
    
@@ -59,26 +63,20 @@ render(){
         textoBoton: "ACTUALIZAR"
     };
     const eleccion={
-        eleccion: 'nel',
-        login: this.state.clienteLogueado 
+        login: this.state.clienteLogueado
     }
 
     return (
         //En react, para dar estilos CSS usamos className en lugar de class
         <div className="App" >
             <BrowserRouter>
-                <Route exact path="/" render={() =>(
+                 <Switch>
+                    
+                   
+                <Route path="/detalle/:id" render={() =>(
                     <div>
                     <Fade in={true}>
-                    <Main {...eleccion} />
-                    </Fade>
-                    </div>
-                )} >
-                </Route>
-                <Route exact path="/detalle" render={() =>(
-                    <div>
-                    <Fade in={true}>
-                    <DetalleProducto/>
+                    <DetalleProducto login={this.state.clienteLogueado}/>
                     </Fade>
                     </div>
                 )} >
@@ -92,6 +90,14 @@ render(){
                     </Fade>
                     </div>
                     )}>
+                </Route>
+                <Route  path="/" render={() =>(
+                    <div>
+                    <Fade in={true}>
+                    <Main {...eleccion} />
+                    </Fade>
+                    </div>
+                )} >
                 </Route>
 
                 <Route path="/registro" render={() => 
@@ -125,7 +131,7 @@ render(){
                     <Arituclo {...this.props} />                   
                     </div>) : <Redirect to="/" />}>
                 </Route>
-                
+                </Switch>
 
             </BrowserRouter>
         </div>

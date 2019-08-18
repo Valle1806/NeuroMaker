@@ -96,10 +96,13 @@ class DescripcionComentario  extends Component{
 											<div id="review-form">
 												<form className="review-form">
 													<textarea className="input" placeholder="Your Review"></textarea>
-													<button className="primary-btn">Submit</button>
+													
 												</form>
+												
 											</div>
+											<button className="primary-btn">Enviar</button>
 										</div>
+										
 									</div>
 								</div>
 							
