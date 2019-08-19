@@ -46,13 +46,14 @@ export async function registrarUsuario(req,res){
 }
 
 export async function loginUsuario(req,res){
-    const { username, passwd}= req.body;
+    const { cedula, clave}= req.body;
+    console.log(cedula, "   ", clave)
     try {
         const busquedaUsuario = await Usuario.findOne({
-            attributes: ['username','passwd'],
+            attributes: ['cedula','clave'],
             where: {
-                cedula: username,
-                clave: passwd
+                cedula: cedula,
+                clave: clave
             }
         });
         if(busquedaUsuario){

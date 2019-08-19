@@ -9,8 +9,8 @@ class LoginClient extends Component {
         super(props);
         //console.log(props)
         this.state = {
-            username: "",
-            contrasena: "",
+            cedula: "",
+            clave: "",
         };
         this.handleOnchange = this.handleOnchange.bind(this);
         this.enviarSolicitud = this.enviarSolicitud.bind(this)
@@ -25,10 +25,11 @@ class LoginClient extends Component {
 
     enviarSolicitud() {
       const mensaje = {
-        username: this.state.username,
-        passwd: this.state.contrasena
+        cedula: this.state.cedula,
+        clave: this.state.clave
         
       }
+      console.log(mensaje)
       
       //Axios se encarga de hacer solicitudes de forma sencilla
       axios.post('http://localhost:4000/usuario/loginUsuario', mensaje)
@@ -134,8 +135,8 @@ class LoginClient extends Component {
                         <FormGroup>
                         <i className="fa fa-user"></i>
                             <Input type="email" name="email"
-                                onChange={this.handleOnchange('username')}
-                                placeholder="Usuario" 
+                                onChange={this.handleOnchange('cedula')}
+                                placeholder="Cedula" 
                                 />
 
                         </FormGroup>
@@ -143,8 +144,8 @@ class LoginClient extends Component {
                         <FormGroup>
                         <i className="fa fa-lock"></i>
                             <Input type="password" name="password"
-                                onChange={this.handleOnchange('contrasena')}
-                                placeholder="contrasena" />
+                                onChange={this.handleOnchange('clave')}
+                                placeholder="Contrasena" />
 
                         </FormGroup>
                         <br />

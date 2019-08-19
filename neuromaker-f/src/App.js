@@ -94,7 +94,7 @@ render(){
                     </div>
                     )}>
                 </Route>
-                <Route  path="/" render={() =>(
+                <Route  exact path="/" render={() =>(
                     <div>
                     <Fade in={true}>
                     <Main {...eleccion} />
@@ -115,20 +115,6 @@ render(){
                     </div>
                     )}>
                 </Route>
-                
-                <Route path="/config" render={() => 
-                    this.state.clienteLogueado ? (<div>                                    
-                    <Header {...this.props} />
-                    <Regitro />
-                    </div>) : <Redirect to="/" />}>
-                </Route>
-
-                <Route path="/categorias" render={() => 
-                    this.state.adminLogueado ? (<div>                                    
-                    <Categoria {...this.props} />                   
-                    </div>) : <Redirect to="/" />}>
-                </Route>
-
                 <Route path="/productos" render={() => 
                     this.state.adminLogueado ? (<div>                                    
                     <Arituclo {...this.props} />                   

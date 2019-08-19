@@ -14,8 +14,7 @@ class Registro extends React.Component {
             clave: props.clave,
             cod_postal: props.cod_postal,
             direccion: props.direccion,
-            nacimiento: props.nacimiento,
-            cumpleanios: props.cumpleanios
+            tarjeta: props.tarjeta
         };
         this.handleOnChange = this.handleOnChange.bind(this) 
         this.enviar = this.enviar.bind(this);
@@ -39,8 +38,7 @@ class Registro extends React.Component {
             nombre: this.state.nombre + ' ' + this.state.apellidos,
             clave: this.state.clave,
             direccion: this.state.direccion,
-            nacimiento: this.state.nacimiento,
-            cumpleanios: this.state.cumpleanios,
+            tarjeta: this.state.tarjeta,
             correo: this.state.correo
         }
     
@@ -57,7 +55,7 @@ class Registro extends React.Component {
                 <Row form>
                     <Col md={6}>
                         <FormGroup>
-                            <Label for="numero">Numero *</Label>
+                            <Label for="numero">Numero cédula*</Label>
                             <Input type="text" id="numero" placeholder="Su identificacion..." 
                             value={this.state.numero}  
                             onChange = {this.handleOnChange('numero')}/>
@@ -116,7 +114,16 @@ class Registro extends React.Component {
                         </FormGroup>
                     </Col>
                 </Row>
-                
+                <Row>
+                <Col md={5}>
+                        <FormGroup>
+                            <Label for="tarjeta">Número de tarjeta</Label>
+                            <Input type="numero" id="tarjeta" placeholder="Su número de tarjeta..." 
+                            value={this.state.tarjeta}  
+                            onChange = {this.handleOnChange('tarjeta')}/>
+                        </FormGroup>
+                </Col>
+                </Row>
         
                 <div className="center">
                     <Button color="danger" onClick={this.enviar}>
