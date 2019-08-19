@@ -17,7 +17,7 @@ footer o header
 
 const listaProductos = (arreglo) => (
   arreglo.map(indice => (
-    <Link key={indice.nombre} to={`/detalle/${indice.costo}`} ><Producto producto ={indice} key={indice.nombre}/></Link>
+    <Link key={indice.id} to={`/detalle/${indice.id}`} ><Producto producto ={indice} key={indice.id}/></Link>
 
   ))
   
@@ -40,15 +40,13 @@ class Main  extends React.Component {
   componentWillMount() {
     
     //Axios se encarga de hacer solicitudes de forma sencilla
-   axios.post('http://localhost:4000/producto/traer')
+   axios.post('http://localhost:4000/producto/consultarProductos')
    .then((response) => {
      
-   
-     if(response.data.mensaje==="Producto encontrado"){
+     if(response.data.mensaje==="Productos encontrados"){
      
        this.setState({productos:response.data.data}) 
        this.setState({cargando:false})
-       console.log(this.state.productos);
      }
 
    })

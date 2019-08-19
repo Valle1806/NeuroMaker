@@ -51,8 +51,8 @@ export async function loginUsuario(req,res){
         const busquedaUsuario = await Usuario.findOne({
             attributes: ['username','passwd'],
             where: {
-                username: username,
-                passwd: passwd
+                cedula: username,
+                clave: passwd
             }
         });
         if(busquedaUsuario){

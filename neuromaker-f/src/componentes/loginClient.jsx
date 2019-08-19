@@ -31,7 +31,7 @@ class LoginClient extends Component {
       }
       
       //Axios se encarga de hacer solicitudes de forma sencilla
-      axios.post('http://localhost:4000/usuario/login', mensaje)
+      axios.post('http://localhost:4000/usuario/loginUsuario', mensaje)
       .then((response) => {
         alert(JSON.stringify(response.data))
         if(response.data.mensaje==="Usuario encontrado"){

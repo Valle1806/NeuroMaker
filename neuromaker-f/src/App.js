@@ -10,6 +10,7 @@ import Categoria from './componentes/categorias'
 import Arituclo from './componentes/articulo'
 import DetalleProducto from './componentes/detalle_ producto'
 import axios from 'axios'
+import Footer from './componentes/footer';
 
 //En esta parte renderizamos lo prinipal
 class App extends Component {
@@ -76,7 +77,9 @@ render(){
                 <Route path="/detalle/:id" render={() =>(
                     <div>
                     <Fade in={true}>
+                    <Header/>
                     <DetalleProducto login={this.state.clienteLogueado}/>
+                    <Footer/>
                     </Fade>
                     </div>
                 )} >
