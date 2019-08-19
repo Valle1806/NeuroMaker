@@ -7,7 +7,7 @@ import { Venta } from './venta';
 import { Detalle_venta } from './detalle_venta';
 import { Comentario } from './comentario';
 
-export const Usuario = sequelize.define('usuario', {
+const Usuario = sequelize.define('usuario', {
     cedula: {
         type: Sequelize.STRING(50),
         notNull: true,
@@ -59,3 +59,5 @@ Usuario.hasOne(Carrito,{foreignKey:'id_vendedor'})
 Usuario.hasMany(Venta,{foreignKey:'id_comprador'})
 Usuario.hasMany(Detalle_venta,{foreignKey:'id_vendedor'})
 Usuario.hasMany(Comentario,{foreignKey:'id_autor'})
+
+export default Usuario;
