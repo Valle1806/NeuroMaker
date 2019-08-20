@@ -36,7 +36,8 @@ class LoginClient extends Component {
       .then((response) => {
         alert(JSON.stringify(response.data))
         if(response.data.mensaje==="Usuario encontrado"){
-          this.props.login(true)
+          window.location.reload(); 
+          localStorage.setItem("token","18182A2ISJ292101");
         }
 
       })

@@ -16,8 +16,8 @@ const Producto = (props) =>{
             </div>
             <div className="product-body">
                 <p className="product-category">{props.producto.categoria}</p>
-                <h3 className="product-name"></h3>
-                <h4 className="product-price">{props.producto.costo} <del className="product-old-price">{//$990.00
+                <h3 className="product-name">{props.producto.nombre}</h3>
+                <h4 className="product-price">{"$"+props.producto.costo} <del className="product-old-price">{//$990.00
                 }</del></h4>
                 <div className="product-rating">
                     <i className="fa fa-star"></i>

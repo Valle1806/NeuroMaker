@@ -3,7 +3,6 @@ import React from 'react'
 import Header from './header'
 import Footer from './footer'
 import Producto from './producto'
-import DetalleProducto from './detalle_ producto'
 import axios from 'axios'
 import { Spinner } from 'reactstrap';
 import {Route , Link } from 'react-router-dom'
@@ -28,7 +27,13 @@ const listaProductos = (arreglo) => (
 class Main  extends React.Component {
   constructor(props){
     super(props);
+    const token = localStorage.getItem("token")
+        let clienteLogueado = true;
+        if (token == null) {
+            clienteLogueado = false;
+        }
     this.state={
+      clienteLogueado,
       cargando: true,
       productos: [
         {

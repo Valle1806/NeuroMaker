@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Main from './componentes/main'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import Header from './componentes/header'
@@ -14,117 +14,114 @@ import Footer from './componentes/footer';
 
 //En esta parte renderizamos lo prinipal
 class App extends Component {
-    constructor(props){
+    constructor(props) {
         super(props)
+        const token= localStorage.getItem("token")
+        let clienteLogueado= true;
+        if(token==null){
+            clienteLogueado= false;
+        }
         this.state = {
-            clienteLogueado: false,
+            clienteLogueado,
             productoSeleccionado: ''
-            
+
         };
         this.handleChangeClienteLog = this.handleChangeClienteLog.bind(this)
-        this.cambiarProdcutoSeleccionado= this.cambiarProdcutoSeleccionado.bind(this)
+        this.cambiarProdcutoSeleccionado = this.cambiarProdcutoSeleccionado.bind(this)
     }
 
-    handleChangeClienteLog(valor){
+    handleChangeClienteLog(valor) {
         this.setState({
             clienteLogueado: valor
         })
     }
-    cambiarProdcutoSeleccionado(valor){
-        this.setState({productoSeleccionado:valor})
+    cambiarProdcutoSeleccionado(valor) {
+        this.setState({ productoSeleccionado: valor })
     }
 
-   
 
-render(){
-    
-    const propiedades={
-        tipo: "cc",
-        numero: "",
-        nombre: "",
-        apellidos: "",
-        correo: "",
-        clave: "",
-        direccion: "",
-        nacimiento: "",
-        cumpleanios: "",
-        textoBoton: "REGISTRARME"
-    };
 
-    const propiedades2={
-        tipo: "CC",
-        numero: "12151518",
-        nombre: "Esneider Manzano",
-        apellidos: "Aranago",
-        correo: "esneider.manzano@correounivalle.edu.co",
-        clave: "stefierrote",
-        direccion: "Cra 28 C # 54 - 123",
-        nacimiento: "1995-10-18",
-        cumpleanios: "1995-10-18",
-        textoBoton: "ACTUALIZAR"
-    };
-    const eleccion={
-        login: this.state.clienteLogueado
-    }
+    render() {
 
-    return (
-        //En react, para dar estilos CSS usamos className en lugar de class
-        <div className="App" >
-            <BrowserRouter>
-                 <Switch>
+        const propiedades = {
+            tipo: "cc",
+            numero: "",
+            nombre: "",
+            apellidos: "",
+            correo: "",
+            clave: "",
+            direccion: "",
+            nacimiento: "",
+            cumpleanios: "",
+            textoBoton: "REGISTRARME"
+        };
+
+        const propiedades2 = {
+            tipo: "CC",
+            numero: "12151518",
+            nombre: "Esneider Manzano",
+            apellidos: "Aranago",
+            correo: "esneider.manzano@correounivalle.edu.co",
+            clave: "stefierrote",
+            direccion: "Cra 28 C # 54 - 123",
+            nacimiento: "1995-10-18",
+            cumpleanios: "1995-10-18",
+            textoBoton: "ACTUALIZAR"
+        };
+        
+
+        return (
+            //En react, para dar estilos CSS usamos className en lugar de class
+            <div className="App" >
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/detalle/:id" render={() => (
+                            <div>
+                                <Fade in={true}>
+                                    <Header />
+                                    <DetalleProducto login={this.state.clienteLogueado} />
+                                    <Footer />
+                                </Fade>
+                            </div>
+                        )} >
+                        </Route>
+                        <Route path="/login" render={() =>
+                            this.state.clienteLogueado ?
+                                <Redirect to="/" /> :
+                                (<div>
+                                    <Fade in={true} className="mt-3">
+                                        <LoginCliente  />
+                                    </Fade>
+                                </div>
+                                )}>
+                        </Route>
+                        <Route exact path="/" render={() => (
+                            <div>
+                                <Fade in={true}>
+                                    <Main/>
+                                </Fade>
+                            </div>
+                        )} >
+                        </Route>
+
+                        <Route path="/registro" render={() =>
+                            this.state.clienteLogueado ?
+                                <Redirect to="/" /> :
+                                (<div>
+                                    <Fade in={true} className="mt-3">
+                                        <Regitro
+                                            login={this.state.clienteLogueado}
+                                        />
+                                    </Fade>
+                                </div>
+                                )}>
+                        </Route>
                     
-                   
-                <Route path="/detalle/:id" render={() =>(
-                    <div>
-                    <Fade in={true}>
-                    <Header/>
-                    <DetalleProducto login={this.state.clienteLogueado}/>
-                    <Footer/>
-                    </Fade>
-                    </div>
-                )} >
-                </Route>
-                <Route path="/login" render={() => 
-                    this.state.clienteLogueado ? 
-                    <Redirect to="/"/> :
-                    (<div>
-                    <Fade in={true} className="mt-3">                
-                    <LoginCliente login={this.handleChangeClienteLog}/>
-                    </Fade>
-                    </div>
-                    )}>
-                </Route>
-                <Route  exact path="/" render={() =>(
-                    <div>
-                    <Fade in={true}>
-                    <Main {...eleccion} />
-                    </Fade>
-                    </div>
-                )} >
-                </Route>
+                    </Switch>
 
-                <Route path="/registro" render={() => 
-                    this.state.clienteLogueado ? 
-                    <Redirect to="/" /> : 
-                    (<div>
-                    <Fade in={true} className="mt-3">    
-                    <Regitro 
-                    login={this.state.clienteLogueado} 
-                    />
-                    </Fade>
-                    </div>
-                    )}>
-                </Route>
-                <Route path="/productos" render={() => 
-                    this.state.adminLogueado ? (<div>                                    
-                    <Arituclo {...this.props} />                   
-                    </div>) : <Redirect to="/" />}>
-                </Route>
-                </Switch>
-
-            </BrowserRouter>
-        </div>
-    );
-}
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
 export default App;

@@ -7,7 +7,7 @@ class DescripcionComentario  extends Component{
 	   super(props);
 	   this.state={
 		activeTab: '1',
-		detalle: props.descripcion
+		detalle: this.props.descripcion
 	   }
 	   console.log(this.props.descripcion)
 	   this.toggle = this.toggle.bind(this);
