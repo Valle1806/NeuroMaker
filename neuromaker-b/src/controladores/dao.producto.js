@@ -1,5 +1,11 @@
 import Producto from '../modelos/producto';
-import Categoria from '../modelos/categoria';
+import {
+    Sequelize
+} from 'sequelize';
+import {
+    sequelize
+} from '../baseDatos/baseDatos';
+
 
 export async function registrarProducto(req, res) {
     const {
@@ -51,23 +57,36 @@ export async function consultarProductos(req, res) {
         descripcion
     } = req.body;
     try {
-        const busquedaProducto = await Producto.findAll({
-            attributes: ['id',
-                'nombre',
-                'costo',
-                'categoria',
-                'imagen',
-                'descripcion'
-            ]
-        });
-        if (busquedaProducto) {
-            return res.json({
-                mensaje: 'Productos encontrados',
-                data: busquedaProducto
+        const newTest = await sequelize.query(
+            `select 
+            producto.id as id,
+            producto.nombre as nombre,
+            producto.imagen as imagen,
+            producto.descripcion as descripcion,
+            categoria.nombre as categoria,
+            producto.costo as costo,
+            producto.descuento as descuento,
+            vendedor.nombre as vendedor,
+            coalesce(cast(substring(cast(avg(calificacion.calificacion) as varchar),0,2) as integer),0) as calificacion
+        from 
+            producto left join calificacion on producto.id = calificacion.id_producto,
+            categoria, 
+            usuario as vendedor
+        where
+            producto.categoria = categoria.id and 
+            producto.id_vendedor = vendedor.cedula
+            group by producto.id, categoria.nombre, vendedor.nombre
+            order by producto.id`, {
+                type: Sequelize.QueryTypes.SELECT
+            })
+        if (newTest) {
+            res.json({
+                mensaje: 'consulta exitosa',
+                data: newTest
             })
         } else {
-            return res.json({
-                mensaje: 'Productos no encontrados',
+            res.json({
+                mensaje: 'consulta vacia',
                 data: {}
             })
         }
@@ -85,12 +104,73 @@ export async function consultarProducto(req, res) {
         id
     } = req.params
     try {
-        const busquedaProducto = await Producto.findOne({
-            where:{
-                id
-            }
+        const newTest = await sequelize.query(
+            `select 
+            producto.id as id,
+            producto.nombre as nombre,
+            producto.imagen as imagen,
+            producto.descripcion as descripcion,
+            categoria.nombre as categoria,
+            producto.costo as costo,
+            producto.descuento as descuento,
+            vendedor.nombre as vendedor,
+            coalesce(cast(substring(cast(avg(calificacion.calificacion) as varchar),0,2) as integer),0) as calificacion
+        from 
+            producto left join calificacion on producto.id = calificacion.id_producto,
+            categoria, 
+            usuario as vendedor
+        where
+            producto.id =${id} and
+            producto.categoria = categoria.id and 
+            producto.id_vendedor = vendedor.cedula
+            group by producto.id, categoria.nombre, vendedor.nombre
+            order by producto.id`, {
+                type: Sequelize.QueryTypes.SELECT
+            })
+        if (newTest) {
+            res.json({
+                mensaje: 'consulta exitosa',
+                data: newTest
+            })
+        } else {
+            res.json({
+                mensaje: 'consulta vacia',
+                data: {}
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            mensaje: 'error',
+            data: {}
         })
-        return res.json(busquedaProducto)
+    }
+}
+
+export async function consultarComentarios(req, res) {
+    const {
+        id
+    } = req.params
+    try {
+        const newTest = await sequelize.query(
+            `select 
+                comentario.id_producto, 
+                comentario.comentario,
+                comentario.fecha,
+                comentario.id_autor
+            from
+                comentario
+                
+            where
+                comentario.id_producto = ${id}`, {
+                type: Sequelize.QueryTypes.SELECT
+            })
+        if (newTest) {
+            res.json({
+                mensaje: 'consulta exitosa',
+                data: newTest
+            })
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({

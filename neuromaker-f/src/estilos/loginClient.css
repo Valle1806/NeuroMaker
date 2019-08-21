@@ -3,106 +3,34 @@ body {
     padding: 0;
     background: #000;
 }
+.login{
+    font-family: 'Montserrat', sans-serif;
+}
 
 #espacio {
     position: relative;
     padding-bottom: 90px;
 }
 
-.Bloque {
-    -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-    width: 820px;
-    display: table;
-}
-
-.Bloque .card-heading {
-    background: #344955;
-    width: 50%;
-    display: table-cell;
-}
-
-.Bloque .card-heading #mundo {
-    height: 335px;
-    width: 335px;
-    background: url("../imagenes/mundo.png") top center/cover no-repeat;
-    background-size: auto auto;
-    position: absolute;
-    margin-left: 40px;
-    margin-top: 90px;
-    -webkit-animation: spin 6s infinite linear;
-    /* Animación y Tiempo que tarda en girar */
-    -moz-animation: spin 6s infinite linear;
-    animation: spin 15s infinite linear;
-}
-
-.Bloque .card-heading #taxi {
-    height: 76px;
-    width: 167px;
-    background: url("../imagenes/taxi.png") top center/cover no-repeat;
-    background-size: auto auto;
-    position: absolute;
-    margin-left: 125px;
-    margin-top: 100px;
-    animation: 3s latido infinite;
-}
-
-.Bloque .card-heading #mundo {
-    height: 335px;
-    width: 335px;
-    background: url("../imagenes/mundo.png") top center/cover no-repeat;
-    background-size: auto auto;
-    position: absolute;
-    margin-left: 40px;
-    margin-top: 90px;
-    -webkit-animation: spin 6s infinite linear;
-    /* Animación y Tiempo que tarda en girar */
-    -moz-animation: spin 6s infinite linear;
-    animation: spin 15s infinite linear;
-}
-
-.Bloque .card-heading #taxi {
-    height: 76px;
-    width: 167px;
-    background: url("../imagenes/taxi.png") top center/cover no-repeat;
-    background-size: auto auto;
-    position: absolute;
-    margin-left: 125px;
-    margin-top: 100px;
-    animation: 3s latido infinite;
+.logo{
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 .Bloque {
-    max-width: 90%;
-    overflow: hidden;
-    margin: 0 auto;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    margin-bottom: 20px;
+    max-width: 420px;
+    border: rgb(13, 177, 226) 1px solid;
+    border-radius: 20px;
+    border-block-end-width: 0em;
+    position: relative;
+    background: #fff;
+    margin:0 auto;
+    padding: 30px;
+    margin-top: 4vh;
+    margin-bottom: 10vh;
 }
 
-@keyframes latido {
-    35% {
-        margin-top: 100px;
-    }
-    43% {
-        margin-top: 93px;
-    }
-    51% {
-        margin-top: 100px;
-    }
-}
 
-@keyframes spin {
-    from {
-        transform: rotate(360deg)
-    }
-    to {
-        transform: rotate(0deg)
-    }
-}
 
 #formularioLogin {
     margin: 0 auto;
@@ -117,7 +45,7 @@ body {
 
 #formularioLogin {
     display: table-cell;
-    padding: 40px 50px;
+    padding: 15px 40px;
 }
 
 #formularioLogin span {
@@ -137,20 +65,4 @@ body {
 
 .btn-danger {
     background-color: #17a2b8;
-}
-
-@media screen and (max-width: 840px) {
-    .card {
-        max-width: 95%;
-        margin: 0 auto;
-        margin-bottom: 50px;
-    }
-    .card-1 {
-        width: 100%;
-    }
-    .card-2 .card-heading,
-    .card-1 .card-heading {
-        width: 0%;
-        display: none;
-    }
 }

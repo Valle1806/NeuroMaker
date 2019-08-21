@@ -1,35 +1,32 @@
 import Usuario from '../modelos/usuario';
 
-export async function registrarUsuario(req,res){
-    const { username,
-        passwd,
-        primer_nombre,
-        segundo_nombre,
-        primer_apellido,
-        segundo_apellido,
-        direccion_residencia,
-        pais,telefono,
-        estado,
-        codigo_de_descuento,
-        vendedor }=req.body;
-    try {
-        let newUsuario= await Usuario.create({
-            username,
-            passwd,
-            primer_nombre,
-            segundo_nombre,
-            primer_apellido,
-            segundo_apellido,
-            direccion_residencia,
-            pais,
-            telefono,
+export async function registrarUsuario(req, res) {
+    const {
+        cedula,
+            clave,
+            nombre,
+            direccion,
+            codigo_postal,
+            tarjeta,
+            correo,
             estado,
-            codigo_de_descuento,
-            vendedor
-        },{
-            fields: ['username','passwd','primer_nombre','segundo_nombre','primer_apellido','segundo_apellido','direccion_residencia','pais','telefono','estado','codigo_de_descuento','vendedor']
+            comision
+    } = req.body;
+    try {
+        let newUsuario = await Usuario.create({
+            cedula,
+            clave,
+            nombre,
+            direccion,
+            codigo_postal,
+            tarjeta,
+            correo,
+            estado,
+            comision
+        }, {
+            fields: ['cedula','clave','nombre','direccion','codigo_postal','tarjeta','correo','estado','comision']
         });
-        if(newUsuario){
+        if (newUsuario) {
             return res.json({
                 mensaje: 'Usuario creado exitosamente',
                 datos: newUsuario
@@ -44,7 +41,6 @@ export async function registrarUsuario(req,res){
     }
     res.send('recibido');
 }
-
 export async function loginUsuario(req,res){
     const { cedula, clave}= req.body;
     console.log(cedula, "   ", clave)

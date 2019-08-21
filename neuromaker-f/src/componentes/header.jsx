@@ -20,7 +20,7 @@ class Header extends Component {
             return <MenuEmergente />
         } else {
             return <div>
-                <Link to="/login">
+                <Link className="link-header" to="/login">
                     <span>Ingresar</span>
                 </Link>
             </div>
@@ -34,9 +34,11 @@ class Header extends Component {
                     <div className="row">
                         <div className="col-md-3">
                             <div className="header-logo">
-                                <a href="#" className="logo">
+                                <div  className="logo">
+                                    <Link to="/"> 
                                     <img src={logo} alt="" />
-                                </a>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -68,12 +70,7 @@ class Header extends Component {
 
                                 </div>
 
-                                <div className="menu-toggle">
-                                    <a href="#">
-                                        <i className="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

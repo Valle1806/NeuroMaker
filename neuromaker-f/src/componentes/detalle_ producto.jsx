@@ -29,15 +29,16 @@ class DetalleProducto extends Component {
         //Axios se encarga de hacer solicitudes de forma sencilla
         axios.post(`http://localhost:4000/producto/consultarProducto/${this.props.match.params.id}`)
             .then((response) => {
-
-                if (response.data != null) {
-                    this.setState({ nombre: response.data.nombre });
-                    this.setState({ imagen: response.data.imagen });
-                    this.setState({ descripcion: response.data.descripcion });
-                    this.setState({ precio: response.data.costo });
-                    this.setState({ categoria: response.data.categoria });
-                    this.setState({ id_vendedor: response.data.id_vendedor });
-                    this.setState({ existencias: response.data.existencias })
+                console.log(response.data.data[0])
+                if (response.data.mensaje==="consulta exitosa") {
+                   
+                    this.setState({ nombre: response.data.data[0].nombre });
+                    this.setState({ imagen: response.data.data[0].imagen });
+                    this.setState({ descripcion: response.data.data[0].descripcion });
+                    this.setState({ precio: response.data.data[0].costo });
+                    this.setState({ categoria: response.data.data[0].categoria });
+                    this.setState({ id_vendedor: response.data.Vendedor }); //DEBE SER ID, NO NOMBRE
+                    //this.setState({ existencias: response.data.existencias }) FAAAAAAAAAAAAAALTAAAAAAA
                   
                 }
 
@@ -110,7 +111,7 @@ class DetalleProducto extends Component {
                             </div>
                         </div>
 
-                        <Detalle {...detalless}/>
+                        <Detalle match={this.state.match}/>
                     </div>
                 </div>
             </div>

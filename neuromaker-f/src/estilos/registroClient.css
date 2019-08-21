@@ -1,9 +1,13 @@
 
 .registro{
     max-width: 700px;
+    min-width: 339px;
+    border: rgb(13, 177, 226) 1px solid;
+    border-radius: 20px;
     position: relative;
     background: #fff;
     margin:0 auto;
     padding: 30px;
-    margin-top: 6vh;
+    margin-top: 4vh;
+    margin-bottom: 6vh;
 }

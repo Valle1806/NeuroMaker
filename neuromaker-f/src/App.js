@@ -109,9 +109,7 @@ class App extends Component {
                                 <Redirect to="/" /> :
                                 (<div>
                                     <Fade in={true} className="mt-3">
-                                        <Regitro
-                                            login={this.state.clienteLogueado}
-                                        />
+                                        <Regitro />
                                     </Fade>
                                 </div>
                                 )}>
