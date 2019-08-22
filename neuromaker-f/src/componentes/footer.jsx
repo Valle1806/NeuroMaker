@@ -5,7 +5,7 @@ const Footer = (props) => {
   return (
     <footer>
     <small>      
-          2019 &#169; V-Shop
+          2019 &#169; Neuromaker
       </small>
   </footer>
   

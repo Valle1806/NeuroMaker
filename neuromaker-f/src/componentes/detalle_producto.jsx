@@ -102,9 +102,9 @@ class DetalleProducto extends Component {
                                 <div className="product-details">
                                     <h2 className="product-name">{this.state.nombre}</h2>
                                     <div>
-                                        <div className="product-rating">
-                                        <Estrellas/>
-                                        </div>
+                                        
+                                        <Estrellas calificacion={this.state.calificacion}/>
+                                       
                                         <a className="review-link" href="#">{this.state.calificacion}/5 Añade tu calificacion</a>
                                     </div>
                                     <div>

@@ -384,7 +384,7 @@
   
   .product .product-body .product-rating {
     position: relative;
-    margin: 15px 0px 10px;
+    margin: 5px 0px 15px;
     height: 20px;
   }
   
@@ -404,7 +404,7 @@
   .product .product-body .product-rating:after {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 65%;
     left: 0;
     right: 0;
     -webkit-transform: translateY(-50%);
@@ -602,6 +602,7 @@
   
   .product-details .product-rating {
     display: inline-block;
+    height: 20px;
     margin-right: 15px;
   }
   
@@ -928,16 +929,17 @@
   
   /*Estrellas*/
   
-  
   .calificacion label {
     font-size: 24px;
   }
   
   .calificacion input {
+    margin-top: 0px;
     display: none;
   }
   
   .calificacion>label {
+    margin-top: 0px;
     color: grey;
   }
   

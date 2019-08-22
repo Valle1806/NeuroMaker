@@ -46,7 +46,6 @@ class DescripcionComentario extends Component {
 				}
 			  ]
 		}
-		console.log(this.state.detalle)
 		this.toggle = this.toggle.bind(this);
 	}
 
@@ -60,12 +59,9 @@ class DescripcionComentario extends Component {
 	componentWillMount(){
 		axios.post(`http://localhost:4000/producto/consultarComentarios/${this.state.match}`)
 		.then((response) => {
-			if (response.data.mensaje==="consulta exitosa") {
-			   console.log(response.data.data);
-			 
+			if (response.data.mensaje==="consulta exitosa") {			 
 				this.setState({comentarios: response.data.data});
 				this.setState({cargando:false});
-				console.log(this.state.comentarios.length)
 			}
 
 		})

@@ -8,7 +8,7 @@ import Example from './componentes/usuario'
 import { Fade } from 'reactstrap';
 import Categoria from './componentes/categorias'
 import Arituclo from './componentes/articulo'
-import DetalleProducto from './componentes/detalle_ producto'
+import DetalleProducto from './componentes/detalle_producto'
 import axios from 'axios'
 import Footer from './componentes/footer';
 
