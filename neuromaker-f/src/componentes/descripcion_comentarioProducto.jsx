@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col, Spinner } from 'reactstrap';
 import classnames from 'classnames';
 
 
 const Comentario = (props) => {
-	console.log(props);
 	return (
 		<li>
 			<div className="review-heading">
-				<h5 className="name">Estemen</h5>
+				<h5 className="name">{props.id_autor}</h5>
 				<p className="date">{props.fecha}</p>
 
 			</div>
@@ -21,24 +20,33 @@ const Comentario = (props) => {
 	);
 
 }
-
+const listaComentarios = (arreglo) => {
+	if(arreglo.length!=0){
+	return (arreglo.map((indice) => (<Comentario key={indice.id_autor} {...indice}/>)))
+	}else{
+		return "No existen comentarios sobre este producto"
+	}
+     
+}
 
 
 
 class DescripcionComentario extends Component {
 	constructor(props) {
 		super(props);
+		
 		this.state = {
 			match: props.match,
+			cargando: true,
 			activeTab: '1',
-			detalle: "",
+			detalle: props.descripcion,
 			comentarios: [
 				{
 				  nombre: ''
 				}
 			  ]
 		}
-		console.log(this.props.descripcion)
+		console.log(this.state.detalle)
 		this.toggle = this.toggle.bind(this);
 	}
 
@@ -54,14 +62,31 @@ class DescripcionComentario extends Component {
 		.then((response) => {
 			if (response.data.mensaje==="consulta exitosa") {
 			   console.log(response.data.data);
+			 
 				this.setState({comentarios: response.data.data});
-			  
+				this.setState({cargando:false});
+				console.log(this.state.comentarios.length)
 			}
 
 		})
 	}
 	render() {
+		if(this.state.cargando){
+			return(   <div>
+
+			{/*<Spinner style={{ position: 'relative', right: '40px', top: '50px' }} type="grow" color="primary" />*/}
+			<Spinner type="grow" color="secondary" />
+			<Spinner type="grow" color="success" />
+			<Spinner type="grow" color="danger" />
+			<Spinner type="grow" color="warning" />
+			<Spinner type="grow" color="info" />
+			<Spinner type="grow" color="light" />
+			<Spinner type="grow" color="dark" />
+  
+		  </div>);
+		}else{
 		return (
+			
 			//-- Product tab -->
 			<div className="col-md-12">
 				<div id="product-tab">
@@ -86,7 +111,7 @@ class DescripcionComentario extends Component {
 							<div className="comentarios">
 								<div className="row">
 									<div className="col-md-12">
-										<p>{this.state.detalles}</p>
+										<p>{this.state.detalle}</p>
 									</div>
 								</div>
 							</div>
@@ -98,18 +123,9 @@ class DescripcionComentario extends Component {
 									<div className="col-md-6">
 										<div id="reviews">
 											<ul className="reviews">
-											{/*this.state.comentarios.map((indice) => (<Comentario key={indice.id_autor} coment={indice}/>))*/}
+											{listaComentarios(this.state.comentarios)}
 
-												<li>
-													<div className="review-heading">
-														<h5 className="name">John</h5>
-														<p className="date">27 DEC 2018, 8:0 PM</p>
-													</div>
-													<div className="review-body">
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-													</div>
-													<hr />
-												</li>
+												
 											</ul>
 
 										</div>
@@ -136,6 +152,7 @@ class DescripcionComentario extends Component {
 			</div>
 
 		);
+	}
 	}
 
 }

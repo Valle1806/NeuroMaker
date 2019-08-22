@@ -1,5 +1,7 @@
 import React from 'react'
 import imagen from '../imagenes/xboxOne.jpeg'
+import {Input, Label} from 'reactstrap'
+import Estrellas from './estrellas'
 
 const Producto = (props) =>{
     return(
@@ -19,12 +21,8 @@ const Producto = (props) =>{
                 <h3 className="product-name">{props.producto.nombre}</h3>
                 <h4 className="product-price">{"$"+props.producto.costo} <del className="product-old-price">{//$990.00
                 }</del></h4>
-                <div className="product-rating">
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
-                    <i className="fa fa-star"></i>
+                <div className="product-rating">  {/*fa fa-star */}
+                   <Estrellas/>
                 </div>
                 
             </div>
