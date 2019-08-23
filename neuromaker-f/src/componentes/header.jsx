@@ -25,8 +25,12 @@ class Header extends Component {
       }
     enviarABuscar=()=>{
         //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
+       
         if(this.state.redirect){
-             return <Redirect to={`/${this.state.filtro}`}/>
+            console.log(window.location)
+            
+             return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
+            
         }
 
     }
@@ -70,9 +74,9 @@ class Header extends Component {
                                         <option value="1">Celulares</option>
                                     </select>
                                     <input onChange={this.handleOnchange('filtro')} className="input" placeholder="Buscar producto" />
-                                    {this.enviarABuscar()}
-                                    <Button onClick={this.setRedirect} className="search-btn">Buscar</Button>
                                     
+                                    <Button onClick={this.setRedirect} className="search-btn">Buscar</Button>
+                                    {this.enviarABuscar()}
                                 </form>
                             </div>
                         </div>
