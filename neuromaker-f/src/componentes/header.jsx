@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from '../logo.png'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+import { Button} from 'reactstrap'
 import MenuEmergente from "./menuEmergenteUsuario";
 //Header simple
 class Header extends Component {
@@ -12,9 +13,27 @@ class Header extends Component {
             clienteLogueado = false;
         }
         this.state = {
-            clienteLogueado
+            clienteLogueado,
+            filtro: '',
+            redirect: false
+
         }
+        this.handleOnchange= this.handleOnchange.bind(this)
     }
+    handleOnchange = input => e => {
+        this.setState({ [input]: e.target.value });
+      }
+    enviarABuscar=()=>{
+        //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
+        if(this.state.redirect){
+             return <Redirect to={`/${this.state.filtro}`}/>
+        }
+
+    }
+    setRedirect=()=>{
+        this.setState({redirect:true})
+    }
+    
     menuOIngreso(opcion) {
         if (opcion) {
             return <MenuEmergente />
@@ -50,8 +69,10 @@ class Header extends Component {
                                         <option value="1">Computadores</option>
                                         <option value="1">Celulares</option>
                                     </select>
-                                    <input className="input" placeholder="Buscar producto" />
-                                    <button className="search-btn">Buscar</button>
+                                    <input onChange={this.handleOnchange('filtro')} className="input" placeholder="Buscar producto" />
+                                    {this.enviarABuscar()}
+                                    <Button onClick={this.setRedirect} className="search-btn">Buscar</Button>
+                                    
                                 </form>
                             </div>
                         </div>

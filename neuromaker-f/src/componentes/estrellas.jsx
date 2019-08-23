@@ -5,7 +5,6 @@ import RatingStar from 'react-rating';
 class Estrellas extends Component {
     constructor(props) {
         super(props);
-        console.log(props.calificacion)
         this.state = {
             calificacion: props.calificacion
         };

@@ -5,7 +5,7 @@ import Footer from './footer'
 import Producto from './producto'
 import axios from 'axios'
 import { Spinner } from 'reactstrap';
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, withRouter } from 'react-router-dom'
 /*
 Los componentes con estado deben ser clases
 vea un ejemplo de componente sin estado en el
@@ -43,18 +43,32 @@ class Main extends React.Component {
     }
   }
   componentWillMount() {
+    console.log(this.props)
+    if(this.props.match.params.filtro != null){
+      //Axios se encarga de hacer solicitudes de forma sencilla
+    axios.post(`http://localhost:4000/producto/filtrarProductos/${this.props.match.params.filtro}`)
+    .then((response) => {
 
-    //Axios se encarga de hacer solicitudes de forma sencilla
+      if (response.data.mensaje === "consulta exitosa") {
+        
+        this.setState({ productos: response.data.data })
+        this.setState({ cargando: false })
+      }
+
+    })
+    }else{
+      //Axios se encarga de hacer solicitudes de forma sencilla
     axios.post('http://localhost:4000/producto/consultarProductos')
-      .then((response) => {
+    .then((response) => {
 
-        if (response.data.mensaje === "consulta exitosa") {
+      if (response.data.mensaje === "consulta exitosa") {
 
-          this.setState({ productos: response.data.data })
-          this.setState({ cargando: false })
-        }
+        this.setState({ productos: response.data.data })
+        this.setState({ cargando: false })
+      }
 
-      })
+    })
+    }
   }
 
 
@@ -92,4 +106,4 @@ class Main extends React.Component {
 
 }
 
-export default Main;
+export default withRouter(Main);

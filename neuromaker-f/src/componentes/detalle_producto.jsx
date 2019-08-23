@@ -9,22 +9,13 @@ import { withRouter } from 'react-router-dom'
 import Estrellas from './estrellas'
  
 
-const cantidadEstrellas = (props) => {
 
-    var aux=[];
-    for (var x = 0; x <props; x++) {
-        aux.push(x); 
-    }
-    return (aux.map((indice) => (<div><Input key={indice} id="radio1" type="radio" name="estrellas" value="5"/>
-    <Label key={indice} for="radio1">✩</Label></div>)))
-     
-}
 
 class DetalleProducto extends Component {
     constructor(props) {
         super(props);
 
-
+        console.log(props)
 
         this.state = {
             match: props.match.params.id,

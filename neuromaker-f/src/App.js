@@ -103,6 +103,14 @@ class App extends Component {
                             </div>
                         )} >
                         </Route>
+                        <Route exact path="/:filtro" render={() => (
+                            <div>
+                                <Fade in={true}>
+                                    <Main/>
+                                </Fade>
+                            </div>
+                        )} >
+                        </Route>
 
                         <Route path="/registro" render={() =>
                             this.state.clienteLogueado ?

@@ -179,3 +179,56 @@ export async function consultarComentarios(req, res) {
         })
     }
 }
+
+
+export async function filtarProductos(req, res) {
+    console.log(req)
+    const {
+        filtro
+    } = req.params;
+    try {
+        const newTest = await sequelize.query(
+            `select 
+            tablaDerivada.id,
+            imagen,
+            tablaDerivada.nombre,
+            categoria.nombre as categoria,
+            costo,
+            calificacion from
+                (select 
+                 id, 
+                 imagen,
+                 categoria,
+                 nombre, 
+                 costo,
+                 coalesce(cast(substring(cast(avg(calificacion.calificacion) as varchar),0,2) as integer),0) as calificacion
+                 from producto left join calificacion on producto.id = calificacion.id_producto 
+                 where 
+                    nombre LIKE '%${filtro}%' OR
+                    nombre LIKE '%${filtro}' OR
+                    nombre LIKE '${filtro}%'
+                group by producto.id) as tablaDerivada,categoria	
+            where 
+                tablaDerivada.categoria = categoria.id
+                 order by tablaDerivada.id`, {
+                type: Sequelize.QueryTypes.SELECT
+            })
+        if (newTest) {
+            res.json({
+                mensaje: 'consulta exitosa',
+                data: newTest
+            })
+        } else {
+            res.json({
+                mensaje: 'consulta vacia',
+                data: {}
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            mensaje: 'Ocurrio un error',
+            data: {}
+        })
+    }
+}

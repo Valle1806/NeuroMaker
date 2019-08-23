@@ -4,7 +4,7 @@ import {Input, Label} from 'reactstrap'
 import Estrellas from './estrellas'
 
 const Producto = (props) =>{
-    console.log(props)
+    
     return(
         
     <div className="product" >
@@ -25,7 +25,6 @@ const Producto = (props) =>{
                 <div className="product-rating">  {/*fa fa-star */}
                    <Estrellas calificacion={props.producto.calificacion}/>
                 </div>
-                
             </div>
             <div className="add-to-cart">
                 <button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i> Añadir al carrito</button>
