@@ -54,8 +54,7 @@ const Usuario = sequelize.define('usuario', {
 
 Usuario.hasMany(Producto,{foreignKey:'id_vendedor'})
 Usuario.hasMany(Calificacion,{foreignKey:'id_autor'})
-Usuario.hasOne(Carrito,{foreignKey:'id_comprador'})
-Usuario.hasOne(Carrito,{foreignKey:'id_vendedor'})
+//Usuario.hasOne(Carrito,{foreignKey:'id_comprador'})
 Usuario.hasMany(Venta,{foreignKey:'id_comprador'})
 Usuario.hasMany(Detalle_venta,{foreignKey:'id_vendedor'})
 Usuario.hasMany(Comentario,{foreignKey:'id_autor'})

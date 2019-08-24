@@ -1,6 +1,8 @@
 import Carrito from '../modelos/carrito'
 
 export async function registrarCarrito(req, res) {
+    console.log("neeeeeeeeeeeeeeeeeeeeeeeeel")
+    console.log(req.body)
     const {
         id_producto,
         cantidad,
@@ -8,19 +10,41 @@ export async function registrarCarrito(req, res) {
         id_vendedor
     } = req.body
     try {
-        let newCarrito = await Carrito.create({
-            id_producto,
-            cantidad,
-            id_comprador,
-            id_vendedor
-        }, {
-            fields: ['id_producto', 'cantidad', 'id_comprador', 'id_vendedor']
+        let existe = await Carrito.findOne({
+            attributes: ['id_producto', 'cantidad'],
+            where: {
+                id_producto,
+                id_comprador
+            }
         })
-        if (newCarrito) {
-            return res.json({
-                mensaje: 'Carrito registrado con exito',
-                datos: newCarrito
-            })
+        if (existe) {
+            let actualizar = await Carrito.update({
+                cantidad
+            }, {
+                    where: { id_producto, id_comprador }
+                }
+            )
+            if(actualizar){
+                return res.json({
+                    mensaje: 'Carrito registrado con exito',
+                    datos: actualizar
+                })
+            }
+        } else {
+            let newCarrito = await Carrito.create({
+                id_producto,
+                cantidad,
+                id_comprador,
+                id_vendedor
+            }, {
+                    fields: ['id_producto', 'cantidad', 'id_comprador', 'id_vendedor']
+                })
+            if (newCarrito) {
+                return res.json({
+                    mensaje: 'Carrito registrado con exito',
+                    datos: newCarrito
+                })
+            }
         }
     } catch (error) {
         console.log(error)
@@ -43,16 +67,16 @@ export async function consultarCarritos(req, res) {
     try {
         let busquedaCarrito = await Carrito.findAll({
             attributes: ['id_producto', 'cantidad', 'id_comprador', 'id_vendedor'],
-            where:{
+            where: {
                 id_comprador
             }
         })
-        if(busquedaCarrito){
+        if (busquedaCarrito) {
             return res.json({
                 mensaje: 'Carrito encontrado',
                 data: busquedaCarrito
             })
-        }else{
+        } else {
             return res.json({
                 mensaje: 'Carrito no encontrado',
                 data: {}

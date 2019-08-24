@@ -4,10 +4,10 @@ import { Button, FormGroup, Input, Container, Row, Col, Label } from 'reactstrap
 import Header from './header';
 import Detalle from './descripcion_comentarioProducto';
 import imagen from '../product01.png'
-import {Spinner} from 'reactstrap'
+import { Spinner, Alert } from 'reactstrap'
 import { withRouter } from 'react-router-dom'
 import Estrellas from './estrellas'
- 
+
 
 
 
@@ -20,6 +20,7 @@ class DetalleProducto extends Component {
         this.state = {
             match: props.match.params.id,
             login: props.login,
+            idProducto: '',
             nombre: '',
             imagen: '',
             descripcion: '',
@@ -28,21 +29,39 @@ class DetalleProducto extends Component {
             id_vendedor: '',
             existencias: '',
             calificacion: '',
-            cantidad:1,
+            cantidad: 1,
             cargando: true,
-            idUsuario
+            idUsuario,
+            alert: false
 
 
         };
-        this.handleOnchange=this.handleOnchange.bind(this)
+        this.handleOnchange = this.handleOnchange.bind(this)
+        this.anadirCarrito = this.anadirCarrito.bind(this)
     }
 
-    anadirCarrito(){
-        const mensaje={
-            
+    anadirCarrito() {
+        const mensaje = {
+            id_producto: this.state.idProducto,
+            cantidad: this.state.cantidad,
+            id_comprador: this.state.idUsuario,
+            id_vendedor: this.state.id_vendedor
         }
+        if(this.state.login){
+        if(mensaje.cantidad<=this.state.existencias && mensaje.className>0){
+        console.log(mensaje)
+        axios.post('http://localhost:4000/carrito/registrarCarrito', mensaje)
+            .then((response) => {
+                this.setState({alert:true})
+            })
+        }else{
+            alert("Ha excedido la cantidad existente")
+        }
+    }else{
+        alert("Debe iniciar sesión")
     }
-    
+    }
+
     handleOnchange = input => e => {
         this.setState({ [input]: e.target.value });
     }
@@ -52,26 +71,35 @@ class DetalleProducto extends Component {
             .then((response) => {
                 if (response.data.mensaje === "consulta exitosa") {
                     console.log(response.data.data)
+                    this.setState({ idProducto: response.data.data[0].id });
                     this.setState({ nombre: response.data.data[0].nombre });
                     this.setState({ imagen: response.data.data[0].imagen });
                     this.setState({ descripcion: response.data.data[0].descripcion });
                     this.setState({ precio: response.data.data[0].costo });
                     this.setState({ categoria: response.data.data[0].categoria });
-                    this.setState({ id_vendedor: response.data.Vendedor }); 
-                    this.setState({ existencias: response.data.cantidad }) 
+                    this.setState({ id_vendedor: response.data.data[0].vendedor });
+                    this.setState({ existencias: response.data.data[0].cantidad })
                     this.setState({ calificacion: response.data.data[0].calificacion });
                     this.setState({ cargando: false })
                 }
 
             })
     }
-
+    mostrarAlerta = () => {
+        if (this.state.alert) {
+            return (
+                <Alert color="success">
+                    Prodcuto añadido exitosamente al carrito
+                </Alert>
+            )
+        }
+    }
 
     render() {
 
         const detalless = {
             descripcion: this.state.descripcion,
-            match:this.state.match
+            match: this.state.match
         }
 
         if (this.state.cargando) {
@@ -89,8 +117,10 @@ class DetalleProducto extends Component {
             </div>);
         } else {
             return (
-
+                <div>
+                    {this.mostrarAlerta()}
                 <div className="section">
+                    
                     <div className="container">
                         <div className="row">
                             <Col md={1}>
@@ -106,9 +136,9 @@ class DetalleProducto extends Component {
                                 <div className="product-details">
                                     <h2 className="product-name">{this.state.nombre}</h2>
                                     <div>
-                                        
-                                        <Estrellas calificacion={this.state.calificacion}/>
-                                       
+
+                                        <Estrellas calificacion={this.state.calificacion} />
+
                                         <a className="review-link" href="#">{this.state.calificacion}/5 Añade tu calificacion</a>
                                     </div>
                                     <div>
@@ -127,12 +157,12 @@ class DetalleProducto extends Component {
                                         <div className="qty-label">
                                             Cantidad
 									<div className="input-number">
-                                                <input type="number" id="cantidad"  
-                                                 value={this.state.cantidad}
-                                                 onChange={this.handleOnchange('cantidad')}/>
+                                                <input type="number" id="cantidad"
+                                                    value={this.state.cantidad}
+                                                    onChange={this.handleOnchange('cantidad')} />
                                             </div>
                                         </div>
-                                        <button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i>Añadir al carrito</button>
+                                        <button className="add-to-cart-btn" onClick={this.anadirCarrito}><i className="fa fa-shopping-cart"></i>Añadir al carrito</button>
 
                                     </div>
 
@@ -146,10 +176,11 @@ class DetalleProducto extends Component {
                             </div>
 
                             <Detalle {...detalless} />
+                            
                         </div>
                     </div>
                 </div>
-
+                </div>
 
             )
         }

@@ -1,9 +1,11 @@
 import { isPrimitive } from 'util';
 
-const Sequelize = require('sequelize'),
-{sequelize} = require('../baseDatos/baseDatos')
 
-export const Carrito = sequelize.define('carrito', {
+import Sequelize from 'sequelize'
+import { sequelize } from '../baseDatos/baseDatos'
+import { Usuario } from './usuario'
+
+ const Carrito = sequelize.define('carrito', {
     id_producto: {
         type: Sequelize.INTEGER,
         notNull: true,
@@ -28,3 +30,4 @@ export const Carrito = sequelize.define('carrito', {
     timestamps: false
 });
 
+export default Carrito
