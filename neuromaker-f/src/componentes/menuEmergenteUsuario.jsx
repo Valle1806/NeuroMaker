@@ -37,8 +37,9 @@ export default class Example extends React.Component {
             {this.state.nombreU}
           </DropdownToggle>
           <DropdownMenu right>
-
+            <Link to={"/actualizar"}>
             <DropdownItem >Perfil</DropdownItem>
+            </Link>
             <Link to={"/"}  >
               <DropdownItem onClick={this.cerrarCesion}>Cerrar Sesión</DropdownItem>
             </Link>

@@ -151,22 +151,53 @@ INSERT INTO categoria(nombre) VALUES
 
 -- PRODUCTOS --------------------------------------------------------------------------------------------------------------------
 INSERT INTO producto (nombre,imagen,descripcion,categoria,costo,descuento,id_vendedor,existencias) VALUES
-	('Xbox One','imagen','Consola Xbox One nueva en color blanco con 500GB y un control',1,900000,0,'1144208998',2),
-	('Honda Civic','imagen','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)',2,43000000,15,'1144182479',1),
-	('Gorra Nike','imagen','Gorra color gris marca Nike',3,18000,10,'1143992392',20),
-	('Spiderman PS4','imagen','Videojuego de Spiderman para la consola PS4',1,200000,10,'1144208998',3),
-	('Las manchas del leopardo','imagen','Libro sobre la evolución de la complejidad del autor Brian Goodwin',4,30000,0,'1144208998',5),
-	('Televisor Samsung','imagen','Televisor SMART TV Samsung 49 pulgadas',5,1400000,15,'1151957133',1),
-	('Brownies Bimbo','imagen','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)',6,12000,0,'1144182479',8),
-	('Lavadora LG Turbodrum','imagen','Lavadora LG Turbodrum con 12 kg de capacidad',5,1100000,25,'1151957133',2),
-	('Sevedol Extrafuerte','imagen','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza',7,24900,0,'1143992392',10),
-	('Escritorio Ermes','imagen','Escritorio Ermes color chocolate',8,170000,10,'1143992392',1),
-	('Juego de mancuernas','imagen','Juego de mancuernas de 70 LBS',9,135000,0,'1151957133',5),
-	('Caja de herramientas CAT Premium','imagen','Caja de herramientas portátil de plástico marca CAT',10,280000,5,'1151957133',3);
+	('Xbox One','https://compass-ssl.xbox.com/assets/05/b0/05b01a46-58eb-4927-ad21-3c43b545ebaf.jpg?n=X1S-2019_Panes-2-Up-1084_111_570x400.jpg','Consola Xbox One nueva en color blanco con 500GB y un control',1,900000,0,'1144208998',2),
+	('Honda Civic','https://static.carroya.com/vehiculos/1885425/1885425_1_m.jpg','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)',2,43000000,15,'1144182479',1),
+	('Gorra Nike','https://www.padelnuestro.com/images/cargador/productos/imagen-2-8994-362d5de0-9491-NORMAL.jpg','Gorra color gris marca Nike',3,18000,10,'1143992392',20),
+	('Spiderman PS4','https://cosonyb2c.vteximg.com.br/arquivos/ids/187331-1000-1000/cover.jpg?v=636704384969230000','Videojuego de Spiderman para la consola PS4',1,200000,10,'1144208998',3),
+	('Las manchas del leopardo','https://cloud10.todocoleccion.online/libros-antiguos-filosofia/tc/2018/02/08/19/111902655_08_08.jpg','Libro sobre la evolución de la complejidad del autor Brian Goodwin',4,30000,0,'1144208998',5),
+	('Televisor Samsung','https://jumbocolombiafood.vteximg.com.br/arquivos/ids/3344522-1000-1000/image-e8180d48663943a8bc3d6c4645f5cda9.jpg?v=636754675744000000','Televisor SMART TV Samsung 49 pulgadas',5,1400000,15,'1151957133',1),
+	('Brownies Bimbo','https://jumbocolombiafood.vteximg.com.br/arquivos/ids/161112-1000-1000/7705326079510.jpg?v=636107438332200000','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)',6,12000,0,'1144182479',8),
+	('Lavadora LG Turbodrum','https://www.lg.com/ec/images/lavadoras-y-secadoras/wfs1634ek/gallery/copy-large01.jpg','Lavadora LG Turbodrum con 12 kg de capacidad',5,1100000,25,'1151957133',2),
+	('Sevedol Extrafuerte','https://www.farmalisto.com.co/110786-thickbox_default/comprar-sevedol-extra-fuerte-caja-x-8-tabletas-precio-7702870004401.jpg','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza',7,24900,0,'1143992392',10),
+	('Escritorio Ermes','https://cdn1.coppel.com/images/catalog/pm/3431023-1.jpg','Escritorio Ermes color chocolate',8,170000,10,'1143992392',1),
+	('Juego de mancuernas','https://images-na.ssl-images-amazon.com/images/I/81S5rzpsuqL._SY355_.jpg','Juego de mancuernas de 70 LBS',9,135000,0,'1151957133',5),
+	('Caja de herramientas CAT Premium','https://http2.mlstatic.com/caja-de-herramientas-portatil-de-plastico-cat-premium-D_NQ_NP_763625-MCO25475431060_032017-F.jpg','Caja de herramientas portátil de plástico marca CAT',10,280000,5,'1151957133',3);
 	
 
 -- ESTADO_ENVIO --------------------------------------------------------------------------------------------------------------------
 INSERT INTO estado_envio (nombre) VALUES ('En camino');
+
+-- CALIFICACION --------------------------------------------------------------------------------------------------------------------
+insert into calificacion (id_producto,id_autor,calificacion) values 
+	(1,'1151957133',4),
+	(1,'1143992392',5),
+	(1,'1144208998',5),
+	(1,'1144182479',2),
+	(2,'1151957133',4),
+	(2,'1143992392',5),
+	(2,'1144208998',1),
+	(2,'1144182479',1),
+	(3,'1151957133',5),
+	(3,'1143992392',5),
+	(3,'1144208998',5),
+	(3,'1144182479',5);
+	
+-- COMENTARIOS --------------------------------------------------------------------------------------------------------------------
+insert into comentario (id_producto,id_autor,comentario) values 
+	(1,'1151957133','No me ha gustao'),
+	(1,'1143992392','Me ha parecido la leche'),
+	(1,'1144208998','genial!!'),
+	(1,'1144182479','De verdad esto es real'),
+	(2,'1151957133','No me ha gustao'),
+	(2,'1143992392','Me ha parecido la leche'),
+	(2,'1144208998','genial!!'),
+	(2,'1144182479','De verdad esto es real'),
+	(3,'1151957133','No me ha gustao'),
+	(3,'1143992392','Me ha parecido la leche'),
+	(3,'1144208998','genial!!'),
+	(3,'1144182479','De verdad esto es real');
+	
 
 -- SUSCRIPCIONES -------------------------------------------------------------------------------------------------------------------
 INSERT INTO suscripcion (nodo_lider, suscriptor) VALUES

@@ -76,6 +76,8 @@ class Main extends React.Component {
           this.setState({ productos: response.data.data })
           this.setState({paginas: Math.ceil((this.state.productos.length)/4)})
           this.setState({ cargando: false })
+          var aux = response.data.data.slice(0,4);
+          this.setState({paginaProductos:  aux})
         }
 
       })

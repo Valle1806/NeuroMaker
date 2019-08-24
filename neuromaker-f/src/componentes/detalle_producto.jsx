@@ -157,7 +157,7 @@ class DetalleProducto extends Component {
                                         <div className="qty-label">
                                             Cantidad
 									<div className="input-number">
-                                                <input type="number" id="cantidad"
+                                                <input type="number" id="cantidad" min="1"
                                                     value={this.state.cantidad}
                                                     onChange={this.handleOnchange('cantidad')} />
                                             </div>
