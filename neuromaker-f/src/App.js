@@ -105,6 +105,16 @@ class App extends Component {
                                 </div>
                                 )}>
                         </Route>
+                        <Route exact path="/:filtro" render={() => (
+                             
+                             <div>
+                                 <Fade in={true}>
+                                     <Main/>
+                                 </Fade>
+                             </div>
+                         )} >
+                         </Route>
+ 
                         <Route exact path="/" render={() => (
                             <div>
                                 <Fade in={true}>
@@ -113,15 +123,7 @@ class App extends Component {
                             </div>
                         )} >
                         </Route>
-                        <Route exact path="/:filtro" render={() => (
-                            <div>
-                                <Fade in={true}>
-                                    <Main/>
-                                </Fade>
-                            </div>
-                        )} >
-                        </Route>
-
+                    
                         
                     
                     </Switch>

@@ -27,9 +27,9 @@ class Header extends Component {
         //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
        
         if(this.state.redirect){
-            
-             return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
-            
+            window.location= `/${this.state.filtro}`;
+           //  return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
+           
         }
 
     }
@@ -57,7 +57,7 @@ class Header extends Component {
                         <div className="col-md-3">
                             <div className="header-logo">
                                 <div  className="logo">
-                                    <Link to="/"> 
+                                    <Link  to="/"> 
                                     <img src={logo} alt="" />
                                     </Link>
                                 </div>
