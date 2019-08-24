@@ -168,6 +168,8 @@ class Registro extends React.Component {
                         <Button color="danger" onClick={this.enviar}>
                             {this.state.textoBoton}
                         </Button>
+                        <br /><br />
+                        <span className="mensajito">¿Ya tienes cuenta? <Link to={"/login"} >Inicia sesión</Link></span>
                     </div>
                 </Form>
             </div>

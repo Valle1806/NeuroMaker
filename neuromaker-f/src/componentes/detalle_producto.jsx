@@ -16,7 +16,7 @@ class DetalleProducto extends Component {
         super(props);
 
         console.log(props)
-
+        const idUsuario = localStorage.getItem("id")
         this.state = {
             match: props.match.params.id,
             login: props.login,
@@ -28,24 +28,37 @@ class DetalleProducto extends Component {
             id_vendedor: '',
             existencias: '',
             calificacion: '',
-            cargando: true
+            cantidad:1,
+            cargando: true,
+            idUsuario
 
 
         };
+        this.handleOnchange=this.handleOnchange.bind(this)
+    }
+
+    anadirCarrito(){
+        const mensaje={
+            
+        }
+    }
+    
+    handleOnchange = input => e => {
+        this.setState({ [input]: e.target.value });
     }
     componentWillMount() {
         //Axios se encarga de hacer solicitudes de forma sencilla
         axios.post(`http://localhost:4000/producto/consultarProducto/${this.props.match.params.id}`)
             .then((response) => {
                 if (response.data.mensaje === "consulta exitosa") {
-
+                    console.log(response.data.data)
                     this.setState({ nombre: response.data.data[0].nombre });
                     this.setState({ imagen: response.data.data[0].imagen });
                     this.setState({ descripcion: response.data.data[0].descripcion });
                     this.setState({ precio: response.data.data[0].costo });
                     this.setState({ categoria: response.data.data[0].categoria });
-                    this.setState({ id_vendedor: response.data.Vendedor }); //DEBE SER ID, NO NOMBRE
-                    //this.setState({ existencias: response.data.existencias }) FAAAAAAAAAAAAAALTAAAAAAA
+                    this.setState({ id_vendedor: response.data.Vendedor }); 
+                    this.setState({ existencias: response.data.cantidad }) 
                     this.setState({ calificacion: response.data.data[0].calificacion });
                     this.setState({ cargando: false })
                 }
@@ -114,7 +127,9 @@ class DetalleProducto extends Component {
                                         <div className="qty-label">
                                             Cantidad
 									<div className="input-number">
-                                                <input type="number" />
+                                                <input type="number" id="cantidad"  
+                                                 value={this.state.cantidad}
+                                                 onChange={this.handleOnchange('cantidad')}/>
                                             </div>
                                         </div>
                                         <button className="add-to-cart-btn"><i className="fa fa-shopping-cart"></i>Añadir al carrito</button>

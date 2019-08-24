@@ -27,7 +27,6 @@ class Header extends Component {
         //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
        
         if(this.state.redirect){
-            console.log(window.location)
             
              return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
             

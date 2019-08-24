@@ -46,7 +46,7 @@ export async function loginUsuario(req,res){
     console.log(cedula, "   ", clave)
     try {
         const busquedaUsuario = await Usuario.findOne({
-            attributes: ['cedula','clave'],
+            attributes: ['cedula','nombre'],
             where: {
                 cedula: cedula,
                 clave: clave

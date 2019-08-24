@@ -39,6 +39,8 @@ class LoginClient extends Component {
         if (response.data.mensaje === "Usuario encontrado") {
           window.location.reload();
           localStorage.setItem("token", "18182A2ISJ292101");
+          localStorage.setItem("id",response.data.data.cedula);
+          localStorage.setItem('nombre',response.data.data.nombre);
         }
 
       })

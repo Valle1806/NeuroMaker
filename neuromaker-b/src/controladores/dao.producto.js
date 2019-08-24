@@ -65,8 +65,9 @@ export async function consultarProductos(req, res) {
             producto.descripcion as descripcion,
             categoria.nombre as categoria,
             producto.costo as costo,
+			producto.existencias as cantidad,
             producto.descuento as descuento,
-            vendedor.nombre as vendedor,
+            vendedor.cedula as vendedor,
             coalesce(cast(substring(cast(avg(calificacion.calificacion) as varchar),0,2) as integer),0) as calificacion
         from 
             producto left join calificacion on producto.id = calificacion.id_producto,
@@ -75,7 +76,7 @@ export async function consultarProductos(req, res) {
         where
             producto.categoria = categoria.id and 
             producto.id_vendedor = vendedor.cedula
-            group by producto.id, categoria.nombre, vendedor.nombre
+            group by producto.id, categoria.nombre, vendedor.cedula
             order by producto.id`, {
                 type: Sequelize.QueryTypes.SELECT
             })
@@ -112,8 +113,9 @@ export async function consultarProducto(req, res) {
             producto.descripcion as descripcion,
             categoria.nombre as categoria,
             producto.costo as costo,
+			producto.existencias as cantidad,
             producto.descuento as descuento,
-            vendedor.nombre as vendedor,
+            vendedor.cedula as vendedor,
             coalesce(cast(substring(cast(avg(calificacion.calificacion) as varchar),0,2) as integer),0) as calificacion
         from 
             producto left join calificacion on producto.id = calificacion.id_producto,
@@ -123,7 +125,7 @@ export async function consultarProducto(req, res) {
             producto.id =${id} and
             producto.categoria = categoria.id and 
             producto.id_vendedor = vendedor.cedula
-            group by producto.id, categoria.nombre, vendedor.nombre
+            group by producto.id, categoria.nombre, vendedor.cedula
             order by producto.id`, {
                 type: Sequelize.QueryTypes.SELECT
             })

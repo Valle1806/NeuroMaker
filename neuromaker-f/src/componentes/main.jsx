@@ -4,6 +4,7 @@ import Header from './header'
 import Footer from './footer'
 import Producto from './producto'
 import axios from 'axios'
+import Paginacion from './paginacion'
 import { Spinner } from 'reactstrap';
 import { Route, Link, withRouter } from 'react-router-dom'
 /*
@@ -39,36 +40,61 @@ class Main extends React.Component {
         {
           nombre: ''
         }
+      ],
+      paginas: '',
+      numPagina: 1,
+      paginaProductos: [
+        {
+          nombre: ''
+        }
       ]
     }
+    this.handleOnchange=this.handleOnchange.bind(this)
   }
+
+  handleOnchange =  (valor) => {
+    console.log(valor);
+    if(valor != 0 && valor <= this.state.paginas){
+      console.log(valor)
+      let nel = [];
+      for(var x=((valor * 4) - 4); x<(valor * 4) && x<this.state.productos.length; x++){
+        nel.push(this.state.productos[x]);
+      }
+      this.setState({numPagina: valor, paginaProductos: nel});
+    }
+  }
+
   componentWillMount() {
     console.log(this.props)
     if(this.props.match.params.filtro != null){
-      //Axios se encarga de hacer solicitudes de forma sencilla
-    axios.post(`http://localhost:4000/producto/filtrarProductos/${this.props.match.params.filtro}`)
-    .then((response) => {
+        //Axios se encarga de hacer solicitudes de forma sencilla
+      axios.post(`http://localhost:4000/producto/filtrarProductos/${this.props.match.params.filtro}`)
+      .then((response) => {
 
-      if (response.data.mensaje === "consulta exitosa") {
-        
-        this.setState({ productos: response.data.data })
-        this.setState({ cargando: false })
-      }
+        if (response.data.mensaje === "consulta exitosa") {
+          
+          this.setState({ productos: response.data.data })
+          this.setState({paginas: Math.ceil((this.state.productos.length)/4)})
+          this.setState({ cargando: false })
+        }
 
-    })
+      })
     }else{
-      //Axios se encarga de hacer solicitudes de forma sencilla
-    axios.post('http://localhost:4000/producto/consultarProductos')
-    .then((response) => {
+        //Axios se encarga de hacer solicitudes de forma sencilla
+      axios.post('http://localhost:4000/producto/consultarProductos')
+      .then((response) => {
 
-      if (response.data.mensaje === "consulta exitosa") {
+        if (response.data.mensaje === "consulta exitosa") {
 
-        this.setState({ productos: response.data.data })
-        this.setState({ cargando: false })
+          this.setState({ productos: response.data.data })
+          this.setState({paginas: Math.ceil((this.state.productos.length)/4)})
+          this.setState({ cargando: false })
+          var aux = response.data.data.slice(0,4);
+          this.setState({paginaProductos:  aux})
+        }
+
+      })
       }
-
-    })
-    }
   }
 
 
@@ -95,7 +121,11 @@ class Main extends React.Component {
         <div>
           <Header />
           <main>
-            {listaProductos(this.state.productos)}
+            {listaProductos(this.state.paginaProductos)}
+            <div>
+              <Paginacion paginas = {this.state.paginas} 
+              funcion = {this.handleOnchange} numPagina = {this.state.numPagina}/>
+            </div>
           </main>
           <Footer />
         </div>

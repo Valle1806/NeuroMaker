@@ -95,6 +95,16 @@ class App extends Component {
                                 </div>
                                 )}>
                         </Route>
+                        <Route path="/registro" render={() =>
+                            this.state.clienteLogueado ?
+                                <Redirect to="/" /> :
+                                (<div>
+                                    <Fade in={true} className="mt-3">
+                                        <Regitro />
+                                    </Fade>
+                                </div>
+                                )}>
+                        </Route>
                         <Route exact path="/" render={() => (
                             <div>
                                 <Fade in={true}>
@@ -112,16 +122,7 @@ class App extends Component {
                         )} >
                         </Route>
 
-                        <Route path="/registro" render={() =>
-                            this.state.clienteLogueado ?
-                                <Redirect to="/" /> :
-                                (<div>
-                                    <Fade in={true} className="mt-3">
-                                        <Regitro />
-                                    </Fade>
-                                </div>
-                                )}>
-                        </Route>
+                        
                     
                     </Switch>
 
