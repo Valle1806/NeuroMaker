@@ -8,16 +8,16 @@ import { Link } from 'react-router-dom'
 class Registro extends React.Component {
     constructor(props) {
         super(props)
-        const token= localStorage.getItem("token");
-        let clienteLogueado= true;
-        let textoBoton= 'Actualizar';
-        if(token==null){
-            textoBoton= 'Registrar'
-            clienteLogueado= false;
+        const token = localStorage.getItem("token");
+        let clienteLogueado = true;
+        let textoBoton = 'Actualizar';
+        if (token == null) {
+            textoBoton = 'Registrar'
+            clienteLogueado = false;
         }
         this.state = {
             cedula: "",
-            nombre:"",
+            nombre: "",
             apellidos: "",
             correo: "",
             clave: "",
@@ -30,7 +30,7 @@ class Registro extends React.Component {
         };
         this.handleOnChange = this.handleOnChange.bind(this)
         this.enviar = this.enviar.bind(this);
-        
+
 
     }
 
@@ -44,7 +44,7 @@ class Registro extends React.Component {
         });
     }
 
-    
+
 
     enviar() {
         const mensaje = {
@@ -57,7 +57,7 @@ class Registro extends React.Component {
             correo: this.state.correo,
             estado: 1,
             comision: this.state.comision
-           
+
         }
         console.log(mensaje)
 
@@ -65,9 +65,12 @@ class Registro extends React.Component {
         axios.post('http://localhost:4000/usuario/registrarUsuario', mensaje)
             .then((response) => {
                 alert(JSON.stringify(response.data.data))
-                if(response.data.mensaje==="Usuario creado exitosamente"){
+                if (response.data.mensaje === "Usuario creado exitosamente") {
                     window.location.reload();
                     localStorage.setItem("token", "18182A2ISJ292101");
+                    localStorage.setItem("id", response.data.data.cedula);
+                    localStorage.setItem('nombre', response.data.data.nombre);
+
                 }
             })
     }

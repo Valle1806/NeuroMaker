@@ -42,6 +42,12 @@ body {
 #formularioLogin h2 {
     text-align: center;
 }
+#formularioLogin .o {
+    margin-top: 7px;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+}
 
 #formularioLogin {
     display: table-cell;
