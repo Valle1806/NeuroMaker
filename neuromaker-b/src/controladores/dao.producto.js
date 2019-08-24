@@ -77,7 +77,7 @@ export async function consultarProductos(req, res) {
             producto.categoria = categoria.id and 
             producto.id_vendedor = vendedor.cedula
             group by producto.id, categoria.nombre, vendedor.cedula
-            order by producto.id`, {
+            order by producto.categoria`, {
                 type: Sequelize.QueryTypes.SELECT
             })
         if (newTest) {

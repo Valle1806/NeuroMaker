@@ -107,6 +107,7 @@ DROP TABLE IF EXISTS comentario CASCADE;
 CREATE TABLE comentario(
 	id_producto INTEGER NOT NULL,
 	id_autor VARCHAR(50) NOT NULL,
+	comentario TEXT NOT NULL,
 	fecha TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
 	CONSTRAINT comentario_pk PRIMARY KEY (id_producto, id_autor, fecha),
