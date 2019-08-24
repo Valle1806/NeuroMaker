@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logo from '../logo.png'
 import { Link, Redirect } from 'react-router-dom'
 import { Button} from 'reactstrap'
+import axios from 'axios'
 import MenuEmergente from "./menuEmergenteUsuario";
 //Header simple
 class Header extends Component {
@@ -15,10 +16,17 @@ class Header extends Component {
         this.state = {
             clienteLogueado,
             filtro: '',
-            redirect: false
+            redirect: false,
+            redirectC: false,
+            categoria: 1,
+            categorias:[
+
+            ]
 
         }
         this.handleOnchange= this.handleOnchange.bind(this)
+        this.setRedirectCategoria=this.setRedirectCategoria.bind(this)
+
     }
     handleOnchange = input => e => {
         this.setState({ [input]: e.target.value });
@@ -33,8 +41,34 @@ class Header extends Component {
         }
 
     }
+    setRedirectCategoria( e) {
+        console.log(e.target.value)
+        this.setState({ categoria: e.target.value });
+        this.setState({redirectC:true})
+      }
+    enviarABuscarCategoria=()=>{
+        //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
+     
+        if(this.state.redirectC){
+            window.location= `/categoria/${this.state.categoria}`;
+           //  return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
+           
+        }
+
+    }
     setRedirect=()=>{
         this.setState({redirect:true})
+    }
+
+    componentWillMount(){
+        //Axios se encarga de hacer solicitudes de forma sencilla
+    axios.post('http://localhost:4000/categoria/consultarCategorias')
+    .then((response) => {
+      if (response.data.mensaje === "Categoria encontrada") {
+        this.setState({categorias: response.data.data})
+      }
+
+    })
     }
     
     menuOIngreso(opcion) {
@@ -67,11 +101,12 @@ class Header extends Component {
                         <div className="col-md-6">
                             <div className="header-search">
                                 <form>
-                                    <select className="input-select">
-                                        <option value="0">Categorias</option>
-                                        <option value="1">Computadores</option>
-                                        <option value="1">Celulares</option>
+                                    <select className="input-select" onChange={this.setRedirectCategoria}>
+                                        <option value={0} >Categorias</option>
+                                        {this.state.categorias.map(indice=>(<option key={indice.id-1} value={indice.id} >{indice.nombre}</option>))}
+                                       
                                     </select>
+                                    {this.enviarABuscarCategoria()}
                                     <input onChange={this.handleOnchange('filtro')} className="input" placeholder="Buscar producto" />
                                     
                                     <Button onClick={this.setRedirect} className="search-btn">Buscar</Button>

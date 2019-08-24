@@ -90,6 +90,9 @@
   }
   
   .header-search form .search-btn {
+    position: relative;
+    right: 15px;
+    top: -1px;
     height: 40px;
     width: 100px;
      
@@ -273,7 +276,7 @@
   /*-- Select input --*/
   
   .input-select {
-    padding: 0px 15px;
+    padding: 0px 6px;
     background: #FFF;
     border: 1px solid #E4E7ED;
     height: 40px;

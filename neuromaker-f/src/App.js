@@ -11,6 +11,7 @@ import Arituclo from './componentes/articulo'
 import DetalleProducto from './componentes/detalle_producto'
 import axios from 'axios'
 import Footer from './componentes/footer';
+import BuscarPCategorias from './componentes/buscarPCategoria'
 
 //En esta parte renderizamos lo prinipal
 class App extends Component {
@@ -85,6 +86,15 @@ class App extends Component {
                             </div>
                         )} >
                         </Route>
+                        <Route exact path="/categoria/:categoria" render={() => (
+                             
+                             <div>
+                                 <Fade in={true}>
+                                     <BuscarPCategorias/>
+                                 </Fade>
+                             </div>
+                         )} >
+                         </Route>
                         <Route path="/login" render={() =>
                             this.state.clienteLogueado ?
                                 <Redirect to="/" /> :

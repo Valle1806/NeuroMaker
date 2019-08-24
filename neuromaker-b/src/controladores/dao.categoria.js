@@ -26,14 +26,9 @@ export async function registrarCategoria(req,res){
 }
 
 export async function consultarCategorias(req,res){
-    const {nombre,id} = req.body
+    
     try {
-        let busquedaCategorias = await Categoria.findAll({
-            attributes:['id','nombre'],
-            where: {
-                id
-            }
-        })
+        let busquedaCategorias = await Categoria.findAll()
         if(busquedaCategorias){
             return res.json({
                 mensaje: 'Categoria encontrada',
