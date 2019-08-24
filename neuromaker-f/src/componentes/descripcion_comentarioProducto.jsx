@@ -129,7 +129,7 @@ class DescripcionComentario extends Component {
 									<div className="col-md-6">
 										<div id="review-form">
 											<form className="review-form">
-												<textarea className="input" placeholder="Your Review"></textarea>
+												<textarea className="input" placeholder="Tu comentaro"></textarea>
 
 											</form>
 

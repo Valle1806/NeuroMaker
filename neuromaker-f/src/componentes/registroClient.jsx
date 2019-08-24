@@ -64,7 +64,7 @@ class Registro extends React.Component {
         //Axios se encarga de hacer solicitudes de forma sencilla
         axios.post('http://localhost:4000/usuario/registrarUsuario', mensaje)
             .then((response) => {
-                alert(JSON.stringify(response.data))
+                alert(JSON.stringify(response.data.data))
                 if(response.data.mensaje==="Usuario creado exitosamente"){
                     window.location.reload();
                     localStorage.setItem("token", "18182A2ISJ292101");
