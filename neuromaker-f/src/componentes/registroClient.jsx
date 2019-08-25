@@ -71,7 +71,11 @@ class Registro extends React.Component {
                     localStorage.setItem("id", response.data.data.cedula);
                     localStorage.setItem('nombre', response.data.data.nombre);
 
-                }
+                }else{
+                    alert(JSON.stringify(response.data.mensaje))
+                  }
+            }).catch((error) => {
+                alert('Campos incompletos')
             })
     }
 
