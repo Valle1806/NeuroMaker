@@ -27,6 +27,7 @@ class Header extends Component {
         }
         this.handleOnchange= this.handleOnchange.bind(this)
         this.setRedirectCategoria=this.setRedirectCategoria.bind(this)
+        
 
     }
     handleOnchange = input => e => {
@@ -55,7 +56,7 @@ class Header extends Component {
     setRedirect=()=>{
         this.setState({redirect:true})
     }
-    setRedirecP=()=>{
+    setRedirectP=()=>{
         this.setState({redirectP:true})
     }
     setRedirectCategoria( e) {

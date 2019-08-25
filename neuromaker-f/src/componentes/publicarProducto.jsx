@@ -20,6 +20,7 @@ class PublicarProducto extends React.Component {
             categoria: 1,
             categorias:[]
         }
+        this.setRedirectCategoria=this.setRedirectCategoria.bind(this)
     }
 
     componentWillMount = (e) => {
@@ -33,7 +34,10 @@ class PublicarProducto extends React.Component {
 
         })
     }
-
+    setRedirectCategoria( e) {
+        console.log(e.target.value)
+        this.setState({ categoria: e.target.value });
+      }
     handleOnChange = input => e => {
         this.setState({ [input]: e.target.value });
     }
@@ -47,7 +51,7 @@ class PublicarProducto extends React.Component {
             descuento: this.state.descuento,
             id_vendedor: '1151957133',
             existencias: this.state.existencias,
-            categoria: 1
+            categoria: this.state.categoria
         }
         
         axios.post('http://localhost:4000/producto/publicarProducto', data)
@@ -116,7 +120,7 @@ class PublicarProducto extends React.Component {
                                 onChange={this.handleOnChange('costo')} />
                         </FormGroup>
                         <FormGroup>
-                            <Input type="select" name='categoria'>
+                            <Input type="select" name='categoria' onChange={this.setRedirectCategoria}>
                                 <option value={0} >Categorias</option>
                                 {this.state.categorias.map(indice=>(<option key={indice.id-1} value={indice.id} >{indice.nombre}</option>))}
                             </Input>
