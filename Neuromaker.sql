@@ -152,18 +152,18 @@ INSERT INTO categoria(nombre) VALUES
 
 -- PRODUCTOS --------------------------------------------------------------------------------------------------------------------
 INSERT INTO producto (nombre,imagen,descripcion,categoria,costo,descuento,id_vendedor,existencias) VALUES
-	('Xbox One','https://compass-ssl.xbox.com/assets/05/b0/05b01a46-58eb-4927-ad21-3c43b545ebaf.jpg?n=X1S-2019_Panes-2-Up-1084_111_570x400.jpg','Consola Xbox One nueva en color blanco con 500GB y un control',1,900000,0,'1144208998',2),
-	('Honda Civic','https://static.carroya.com/vehiculos/1885425/1885425_1_m.jpg','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)',2,43000000,15,'1144182479',1),
-	('Gorra Nike','https://www.padelnuestro.com/images/cargador/productos/imagen-2-8994-362d5de0-9491-NORMAL.jpg','Gorra color gris marca Nike',3,18000,10,'1143992392',20),
-	('Spiderman PS4','https://cosonyb2c.vteximg.com.br/arquivos/ids/187331-1000-1000/cover.jpg?v=636704384969230000','Videojuego de Spiderman para la consola PS4',1,200000,10,'1144208998',3),
-	('Las manchas del leopardo','https://cloud10.todocoleccion.online/libros-antiguos-filosofia/tc/2018/02/08/19/111902655_08_08.jpg','Libro sobre la evolución de la complejidad del autor Brian Goodwin',4,30000,0,'1144208998',5),
-	('Televisor Samsung','https://jumbocolombiafood.vteximg.com.br/arquivos/ids/3344522-1000-1000/image-e8180d48663943a8bc3d6c4645f5cda9.jpg?v=636754675744000000','Televisor SMART TV Samsung 49 pulgadas',5,1400000,15,'1151957133',1),
-	('Brownies Bimbo','https://jumbocolombiafood.vteximg.com.br/arquivos/ids/161112-1000-1000/7705326079510.jpg?v=636107438332200000','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)',6,12000,0,'1144182479',8),
-	('Lavadora LG Turbodrum','https://www.lg.com/ec/images/lavadoras-y-secadoras/wfs1634ek/gallery/copy-large01.jpg','Lavadora LG Turbodrum con 12 kg de capacidad',5,1100000,25,'1151957133',2),
-	('Sevedol Extrafuerte','https://www.farmalisto.com.co/110786-thickbox_default/comprar-sevedol-extra-fuerte-caja-x-8-tabletas-precio-7702870004401.jpg','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza',7,24900,0,'1143992392',10),
-	('Escritorio Ermes','https://cdn1.coppel.com/images/catalog/pm/3431023-1.jpg','Escritorio Ermes color chocolate',8,170000,10,'1143992392',1),
-	('Juego de mancuernas','https://images-na.ssl-images-amazon.com/images/I/81S5rzpsuqL._SY355_.jpg','Juego de mancuernas de 70 LBS',9,135000,0,'1151957133',5),
-	('Caja de herramientas CAT Premium','https://http2.mlstatic.com/caja-de-herramientas-portatil-de-plastico-cat-premium-D_NQ_NP_763625-MCO25475431060_032017-F.jpg','Caja de herramientas portátil de plástico marca CAT',10,280000,5,'1151957133',3);
+	('Xbox One','1db4vtfa0jzpzbywm.jpeg','Consola Xbox One nueva en color blanco con 500GB y un control',1,900000,0,'1144208998',2),
+	('Honda Civic','1db4vtfa0jzpzfgsn.jpg','Automóvil Honda Civic modelo 2013 en color Plateado (NO ES ROBADO)',2,43000000,15,'1144182479',1),
+	('Gorra Nike','1db4vtfa0jzpzg3yf.jpg','Gorra color gris marca Nike',3,18000,10,'1143992392',20),
+	('Spiderman PS4','1db4vtfa0jzpzgs3b.jpg','Videojuego de Spiderman para la consola PS4',1,200000,10,'1144208998',3),
+	('Las manchas del leopardo','1db4vtfa0jzpzhu7x.jpg','Libro sobre la evolución de la complejidad del autor Brian Goodwin',4,30000,0,'1144208998',5),
+	('Televisor Samsung','1db4vtfa0jzpzj5e6.jpg','Televisor SMART TV Samsung 49 pulgadas',5,1400000,15,'1151957133',1),
+	('Brownies Bimbo','1db4vtfa0jzpzjtfi.jpg','Paquete de deliciosos brownies marca Bimbo (NO VENCIDOS)',6,12000,0,'1144182479',8),
+	('Lavadora LG Turbodrum','1db4vtfa0jzpzlwb8.jpg','Lavadora LG Turbodrum con 12 kg de capacidad',5,1100000,25,'1151957133',2),
+	('Sevedol Extrafuerte','1db4vtfa0jzpzmcu6.jpg','Paquete de medicinas Sevedol Extrafuerte, para severos dolores de cabeza',7,24900,0,'1143992392',10),
+	('Escritorio Ermes','1db4vtfa0jzpzmvme.jpg','Escritorio Ermes color chocolate',8,170000,10,'1143992392',1),
+	('Juego de mancuernas','1db4vtfa0jzpznboh.jpg','Juego de mancuernas de 70 LBS',9,135000,0,'1151957133',5),
+	('Caja de herramientas CAT Premium','1db4vtfa0jzpznu2m.jpg','Caja de herramientas portátil de plástico marca CAT',10,280000,5,'1151957133',3);
 	
 
 -- ESTADO_ENVIO --------------------------------------------------------------------------------------------------------------------
