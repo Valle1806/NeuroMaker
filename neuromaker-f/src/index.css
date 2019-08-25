@@ -129,6 +129,12 @@ footer{
   color: #FFF;
 }
 
+.header-ctn .btn-publicar{
+  position: absolute;
+  right: 186px;
+  top: 39px;
+}
+
 .header-ctn>div>a>i {
   display: block;
   font-size: 18px;

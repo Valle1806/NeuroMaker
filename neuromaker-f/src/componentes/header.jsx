@@ -41,6 +41,19 @@ class Header extends Component {
         }
 
     }
+    publicarProducto=()=>{
+        //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
+       
+        if(this.state.redirect){
+            window.location= "/publicarProducto";
+           //  return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
+           
+        }
+
+    }
+    setRedirect=()=>{
+        this.setState({redirect:true})
+    }
     setRedirectCategoria( e) {
         console.log(e.target.value)
         this.setState({ categoria: e.target.value });
@@ -56,9 +69,7 @@ class Header extends Component {
         }
 
     }
-    setRedirect=()=>{
-        this.setState({redirect:true})
-    }
+   
 
     componentWillMount(){
         //Axios se encarga de hacer solicitudes de forma sencilla
@@ -111,14 +122,17 @@ class Header extends Component {
                                     
                                     <Button onClick={this.setRedirect} className="search-btn">Buscar</Button>
                                     {this.enviarABuscar()}
+                                   
                                 </form>
                             </div>
                         </div>
 
                         <div className="col-md-3 clearfix">
+                            
                             <div className="header-ctn">
-
-
+                            <Button onClick={this.setRedirect} className="btn-publicar">Publicar</Button>
+                                    {this.publicarProducto()}
+                            
                                 {// Carrito
                                 }
 

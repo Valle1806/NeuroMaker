@@ -77,7 +77,9 @@ class App extends Component {
             <div className="App" >
                 <BrowserRouter>
                     <Switch>
-                    <Route path="/publicarProducto" render={()=>(
+                    <Route path="/publicarProducto" render={()=>
+                        this.state.clienteLogueado ?
+                        (
                             <div>
                             <Fade in={true}>
                                 <Header />
@@ -85,7 +87,8 @@ class App extends Component {
                                 <Footer/>
                             </Fade>
                             </div>
-                        )}
+                        ): <Redirect to="/login" /> 
+                    }
                         /> 
                         <Route path="/detalle/:id" render={() => (
                             <div>

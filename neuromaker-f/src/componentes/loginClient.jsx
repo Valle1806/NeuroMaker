@@ -35,12 +35,15 @@ class LoginClient extends Component {
     //Axios se encarga de hacer solicitudes de forma sencilla
     axios.post('http://localhost:4000/usuario/loginUsuario', mensaje)
       .then((response) => {
-        alert(JSON.stringify(response.data))
+        
         if (response.data.mensaje === "Usuario encontrado") {
+          alert(JSON.stringify(response.data.mensaje))
           window.location.reload();
           localStorage.setItem("token", "18182A2ISJ292101");
           localStorage.setItem("id",response.data.data.cedula);
           localStorage.setItem('nombre',response.data.data.nombre);
+        }else{
+          alert(JSON.stringify(response.data.mensaje))
         }
 
       })

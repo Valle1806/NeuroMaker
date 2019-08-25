@@ -48,7 +48,7 @@ class DetalleProducto extends Component {
             id_vendedor: this.state.id_vendedor
         }
         if(this.state.login){
-        if(mensaje.cantidad<=this.state.existencias && mensaje.className>0){
+        if(mensaje.cantidad<=this.state.existencias && mensaje.cantidad>0){
         console.log(mensaje)
         axios.post('http://localhost:4000/carrito/registrarCarrito', mensaje)
             .then((response) => {

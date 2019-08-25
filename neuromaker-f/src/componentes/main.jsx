@@ -87,7 +87,7 @@ class Main extends React.Component {
       .then((response) => {
 
         if (response.data.mensaje === "consulta exitosa") {
-
+          console.log(response.data.data)
           this.setState({ productos: response.data.data })
           this.setState({paginas: Math.ceil((this.state.productos.length)/4)})
           this.setState({ cargando: false })
