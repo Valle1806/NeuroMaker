@@ -18,6 +18,7 @@ class Header extends Component {
             filtro: '',
             redirect: false,
             redirectC: false,
+            redirectP: false,
             categoria: 1,
             categorias:[
 
@@ -44,7 +45,7 @@ class Header extends Component {
     publicarProducto=()=>{
         //return <Redirect to={`${window.location.origin + this.state.filtro}`}/>
        
-        if(this.state.redirect){
+        if(this.state.redirectP){
             window.location= "/publicarProducto";
            //  return <Redirect from={window.location.pathname} to={`/${this.state.filtro}`}/>
            
@@ -53,6 +54,9 @@ class Header extends Component {
     }
     setRedirect=()=>{
         this.setState({redirect:true})
+    }
+    setRedirecP=()=>{
+        this.setState({redirectP:true})
     }
     setRedirectCategoria( e) {
         console.log(e.target.value)
@@ -130,7 +134,7 @@ class Header extends Component {
                         <div className="col-md-3 clearfix">
                             
                             <div className="header-ctn">
-                            <Button onClick={this.setRedirect} className="btn-publicar">Publicar</Button>
+                            <Button onClick={this.setRedirectP} className="btn-publicar">Publicar</Button>
                                     {this.publicarProducto()}
                             
                                 {// Carrito
