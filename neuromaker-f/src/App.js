@@ -12,6 +12,7 @@ import DetalleProducto from './componentes/detalle_producto'
 import axios from 'axios'
 import Footer from './componentes/footer';
 import BuscarPCategorias from './componentes/buscarPCategoria'
+import PublicarProducto from './componentes/publicarProducto'
 
 //En esta parte renderizamos lo prinipal
 class App extends Component {
@@ -76,6 +77,16 @@ class App extends Component {
             <div className="App" >
                 <BrowserRouter>
                     <Switch>
+                    <Route path="/publicarProducto" render={()=>(
+                            <div>
+                            <Fade in={true}>
+                                <Header />
+                                <PublicarProducto/>
+                                <Footer/>
+                            </Fade>
+                            </div>
+                        )}
+                        /> 
                         <Route path="/detalle/:id" render={() => (
                             <div>
                                 <Fade in={true}>

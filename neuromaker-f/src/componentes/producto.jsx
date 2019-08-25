@@ -1,5 +1,4 @@
 import React from 'react'
-import imagen from '../imagenes/xboxOne.jpeg'
 import {Input, Label} from 'reactstrap'
 import Estrellas from './estrellas'
 
@@ -10,7 +9,7 @@ const Producto = (props) =>{
     <div className="product" >
         
             <div className="product-img">
-            <img src={props.producto.imagen} className="App-logo" alt="logo" />
+            <img src={`http://localhost:4000/uploads/${props.producto.imagen}`} className="App-logo" alt="logo"/>
                 <div className="product-label">
                     {//<span className="sale">-30%</span>
                     }
@@ -20,7 +19,7 @@ const Producto = (props) =>{
             <div className="product-body">
                 <p className="product-category">{props.producto.categoria}</p>
                 <h3 className="product-name">{props.producto.nombre}</h3>
-                <h4 className="product-price">{"$"+props.producto.costo} <del className="product-old-price">{//$990.00
+                <h4 className="product-price">{'$'+props.producto.costo} <del className="product-old-price">{//$990.00
                 }</del></h4>
                 <div className="product-rating">  {/*fa fa-star */}
                    <Estrellas calificacion={props.producto.calificacion}/>

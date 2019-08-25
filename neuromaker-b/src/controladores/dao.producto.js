@@ -7,7 +7,7 @@ import {
 } from '../baseDatos/baseDatos';
 
 
-export async function registrarProducto(req, res) {
+export async function publicarProducto(req, res) {
     const {
         nombre,
         imagen,
@@ -32,7 +32,7 @@ export async function registrarProducto(req, res) {
             fields: ['nombre', 'imagen', 'descripcion', 'categoria', 'costo', 'descuento', 'id_vendedor', 'existencias']
         });
         if (newProducto) {
-            return res.json({
+            res.json({
                 mensaje: 'Producto registrado',
                 datos: newProducto
             });

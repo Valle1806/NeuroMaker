@@ -120,7 +120,7 @@ class Main extends React.Component {
     } else {
       return (
 
-        <div>
+        <div className="center">
           <Header />
           <main>
             {listaProductos(this.state.paginaProductos)}

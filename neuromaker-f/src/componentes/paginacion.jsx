@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import { Pagination, PaginationItem, PaginationLink, Fade } from 'reactstrap';
 
 /*
 const PaginacionItem = (props) => {
@@ -66,7 +66,7 @@ export default class Paginacion extends React.Component {
         }
        
         return (
-            <Pagination aria-label="Page navigation example">
+            <Pagination className="center" aria-label="Page navigation example">
                 <PaginationItem>
                     <PaginationLink first value={1} onClick = {e => this.setRedireccionar(e, "value")}/>
                 </PaginationItem>
@@ -76,9 +76,11 @@ export default class Paginacion extends React.Component {
                 { 
                     aux.map(indice => (
                     <PaginationItem key={indice}>
+                        <Fade in={true}>
                         <PaginationLink value={indice} onClick = {e => this.setRedireccionar(e, "value")}>
                             {indice}
                         </PaginationLink>
+                        </Fade>
                     </PaginationItem>
        
                        ))                                        

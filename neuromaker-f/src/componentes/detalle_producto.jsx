@@ -89,7 +89,7 @@ class DetalleProducto extends Component {
         if (this.state.alert) {
             return (
                 <Alert color="success">
-                    Prodcuto añadido exitosamente al carrito
+                    Producto añadido exitosamente al carrito
                 </Alert>
             )
         }
@@ -127,7 +127,7 @@ class DetalleProducto extends Component {
                             </Col>
                             <Col md={5}>
                                 <div className="product-preview">
-                                    <img src={this.state.imagen} alt="" />
+                                    <img src={`http://localhost:4000/uploads/${this.state.imagen}`} alt="" />
                                 </div>
 
                             </Col>
@@ -142,8 +142,10 @@ class DetalleProducto extends Component {
                                         <a className="review-link" href="#">{this.state.calificacion}/5 Añade tu calificacion</a>
                                     </div>
                                     <div>
-                                        <h3 className="product-price">{"$" + this.state.precio} <del className="product-old-price">$990.00</del></h3>
-                                        <span className="product-available">In Stock</span>
+                                        <h3 className="product-price">{"$" + this.state.precio} 
+                                            {/* <del className="product-old-price">$990.00</del> */}
+                                        </h3>
+                                        <span className="product-available">Disponible</span>
                                     </div>
 
 
@@ -167,7 +169,7 @@ class DetalleProducto extends Component {
                                     </div>
 
                                     <ul className="product-links">
-                                        <li>Category:</li>
+                                        <li>Categoria:</li>
                                         <li><a href="#">{this.state.categoria}</a></li>
                                     </ul>
 

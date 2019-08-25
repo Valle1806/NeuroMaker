@@ -59,7 +59,7 @@ class Registro extends React.Component {
             comision: this.state.comision
 
         }
-        console.log(mensaje)
+        console.log(JSON.stringify(mensaje))
 
         //Axios se encarga de hacer solicitudes de forma sencilla
         axios.post('http://localhost:4000/usuario/registrarUsuario', mensaje)

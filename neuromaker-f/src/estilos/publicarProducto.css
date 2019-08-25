@@ -1,0 +1,37 @@
+
+*{
+    font-family: 'Open Sans', sans-serif;
+}
+.publicacion{
+    
+    max-width: 750px;
+    min-width: 340px;
+    border: 1px rgb(224, 224, 224) solid;
+    background: linear-gradient(rgb(223, 223, 223),rgb(243, 243, 243)) ;
+    border-radius: 20px;
+    position: relative;
+    margin:0 auto;
+    padding: 30px;
+    margin-top: 4vh;
+    margin-bottom: 6vh;
+    visibility: 
+}
+
+h1{
+    margin: 0 auto;
+    color: rgb(0, 46, 59);
+    padding-bottom: 1em
+}
+
+img.imagen{
+    width: 300px; 
+    height:300px;
+    margin-bottom: 0.5em;
+    border-radius: 10px;
+    border: rgb(206, 206, 206) 1px solid;
+}
+
+input.file{
+    
+    font-size: 0.8em;
+}
