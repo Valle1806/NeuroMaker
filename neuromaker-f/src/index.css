@@ -133,6 +133,7 @@ footer{
   position: absolute;
   right: 108px;
   top: 39px;
+  margin-right: 50px;
 }
 
 .header-ctn>div>a>i {
@@ -533,6 +534,9 @@ textarea.input {
 }
 
 .ingresarCliente{
+  position: relative;
+  left: 53px;
+  top: -1px;
   text-align: center;
   font-size: 15px;
  
