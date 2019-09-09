@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { Button} from 'reactstrap'
 import axios from 'axios'
 import MenuEmergente from "./menuEmergenteUsuario";
+import Carrito from "./carrito";
 //Header simple
 class Header extends Component {
     constructor(props) {
@@ -106,11 +107,11 @@ class Header extends Component {
                     <div className="row">
                         <div className="col-md-3">
                             <div className="header-logo">
-                                <div  className="logo">
+                               
                                     <Link  to="/"> 
                                     <img src={logo} alt="" />
                                     </Link>
-                                </div>
+                              
                             </div>
                         </div>
 
@@ -137,7 +138,7 @@ class Header extends Component {
                             <div className="header-ctn">
                             <Button onClick={this.setRedirectP} className="btn-publicar">Publicar</Button>
                                     {this.publicarProducto()}
-                            
+                                <Carrito/>
                                 {// Carrito
                                 }
 
