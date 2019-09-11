@@ -29,5 +29,4 @@ import { Usuario } from './usuario'
     freezeTableName: true,
     timestamps: false
 });
-
 export default Carrito

@@ -73,8 +73,7 @@ CREATE TABLE carrito(
 	id_vendedor VARCHAR(50) NOT NULL,
 
 	CONSTRAINT carrito_pk PRIMARY KEY (id_producto, id_comprador),
-	CONSTRAINT carrito_fk1 FOREIGN KEY (id_comprador) REFERENCES usuario (cedula) ON DELETE CASCADE,
-	CONSTRAINT carrito_fk2 FOREIGN KEY (id_vendedor) REFERENCES usuario (cedula) ON DELETE CASCADE
+	CONSTRAINT carrito_fk1 FOREIGN KEY (id_comprador) REFERENCES usuario (cedula) ON DELETE CASCADE
 );
 
 -- VENTA ---------------------------------------------------------------------------------------------

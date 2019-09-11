@@ -1,4 +1,11 @@
 import Carrito from '../modelos/carrito'
+import {
+    Sequelize
+} from 'sequelize';
+import {
+    sequelize
+} from '../baseDatos/baseDatos';
+
 
 export async function registrarCarrito(req, res) {
     console.log("neeeeeeeeeeeeeeeeeeeeeeeeel")
@@ -19,7 +26,7 @@ export async function registrarCarrito(req, res) {
         })
         if (existe) {
             let actualizar = await Carrito.update({
-                cantidad
+                cantidad: existe.cantidad+ cantidad
             }, {
                     where: { id_producto, id_comprador }
                 }
@@ -58,19 +65,17 @@ export async function registrarCarrito(req, res) {
 
 export async function consultarCarritos(req, res) {
     const {
-        id_producto,
-        cantidad,
-        id_comprador,
-        id_vendedor
-    } = req.body
+        id_comprador
+    } = req.params
 
     try {
-        let busquedaCarrito = await Carrito.findAll({
-            attributes: ['id_producto', 'cantidad', 'id_comprador', 'id_vendedor'],
-            where: {
-                id_comprador
-            }
-        })
+          const busquedaCarrito = await sequelize.query(
+            `select id_producto, imagen, nombre, cantidad, costo, carrito.id_vendedor
+            from carrito join producto on producto.id = carrito.id_producto 
+            where id_comprador= '${id_comprador}' 
+            `, {
+                type: Sequelize.QueryTypes.SELECT
+            })
         if (busquedaCarrito) {
             return res.json({
                 mensaje: 'Carrito encontrado',
@@ -89,5 +94,23 @@ export async function consultarCarritos(req, res) {
             mensaje: 'Error',
             data: {}
         })
+    }
+}
+export async function borrarProductoCarrito(req, res) {
+    const {  id_producto, id_comprador } = req.body;
+    try {
+        const numRowDelete = await Carrito.destroy({
+            where: {
+                id_producto, id_comprador 
+            }
+        });
+        console.log(numRowDelete)
+        return res.json(numRowDelete);
+    } catch (e) {
+        console.log(e);
+        res.status(703).json({
+            message: "Algo salio mal 703",
+            data: {}
+        });
     }
 }

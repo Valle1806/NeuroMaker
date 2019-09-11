@@ -11,6 +11,7 @@ import rutasCarrito from'./rutas/carrito'
 import rutasCategoria from'./rutas/categoria'
 import rutasComentario from'./rutas/comentario'
 import rutasDetalle_venta from'./rutas/detalle_venta'
+import rutasVentas from './rutas/venta'
 import rutasEnvio from'./rutas/envio'
 import rutasEstado_envio from'./rutas/estado_envio'
 import rutasProducto from'./rutas/producto'
@@ -46,12 +47,14 @@ app.use('/calificacion',rutasCalificacion)
 app.use('/carrito', rutasCarrito)
 app.use('/categoria', rutasCategoria)
 app.use('/comentario', rutasComentario)
+app.use('/venta', rutasVentas)
 app.use('/detalle_venta', rutasDetalle_venta)
 app.use('/envio', rutasEnvio)
 app.use('/estado_envio', rutasEstado_envio)
 app.use('/producto', rutasProducto)
 app.use('/usuario', rutasUsuario)
 app.use('/uploadImage',uploadImage)
+
 
 
 export default app

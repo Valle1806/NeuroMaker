@@ -66,7 +66,7 @@ export default class Paginacion extends React.Component {
         }
        
         return (
-            <Pagination className="center" aria-label="Page navigation example">
+            <Pagination className="paginacion" aria-label="Page navigation example">
                 <PaginationItem>
                     <PaginationLink first value={1} onClick = {e => this.setRedireccionar(e, "value")}/>
                 </PaginationItem>

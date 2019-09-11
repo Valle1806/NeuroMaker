@@ -6,7 +6,6 @@ import LoginCliente from './componentes/loginClient'
 import Regitro from './componentes/registroClient'
 import Example from './componentes/usuario'
 import { Fade } from 'reactstrap';
-import Categoria from './componentes/categorias'
 import Arituclo from './componentes/producto'
 import DetalleProducto from './componentes/detalle_producto'
 import axios from 'axios'

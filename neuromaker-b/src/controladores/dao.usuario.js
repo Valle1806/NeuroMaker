@@ -71,3 +71,31 @@ export async function loginUsuario(req,res){
         })
     }
 }
+
+export async function obtenerDatosUsuario(req,res){
+    const { id_comprador}= req.body;
+    try {
+        const busquedaUsuario = await Usuario.findOne({
+            where: {
+                cedula: id_comprador
+            }
+        });
+        if(busquedaUsuario){
+            return res.json({
+                mensaje: 'Usuario encontrado',
+                data: busquedaUsuario
+            })
+        }else{
+            return res.json({
+                mensaje: 'Usuario no encontrado',
+                data: {}
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            mensaje: 'Error no detectado',
+            data: {}
+        })
+    }
+}
