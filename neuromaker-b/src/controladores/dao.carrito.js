@@ -7,6 +7,39 @@ import {
 } from '../baseDatos/baseDatos';
 
 
+export async function buscarUnProductoCarrito(req, res){
+    
+    const {
+        id_producto, id_comprador
+    } =req.body
+
+    try {
+        let existe = await Carrito.findOne({
+            attributes: ['id_producto', 'cantidad'],
+            where: {
+                id_producto,
+                id_comprador
+            }
+        })
+        if (existe) {
+            return res.json({
+                mensaje: 'Producto encontrado',
+                data: existe
+            })
+        }else{
+            return res.json({
+                mensaje: 'Producto no encontrado',
+                data: existe
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            mensaje: 'no pudo registrarse el carrito',
+            data: {}
+        })
+    }
+}
 export async function registrarCarrito(req, res) {
     console.log("neeeeeeeeeeeeeeeeeeeeeeeeel")
     console.log(req.body)
@@ -104,7 +137,48 @@ export async function borrarProductoCarrito(req, res) {
                 id_producto, id_comprador 
             }
         });
+        if (numRowDelete) {
+            return res.json({
+                mensaje: 'Producto eliminado',
+                data: numRowDelete
+            })
+        } else {
+            return res.json({
+                mensaje: 'Producto NO eliminado',
+                data: {}
+            })
+        }
+        
+       
+    } catch (e) {
+        console.log(e);
+        res.status(703).json({
+            message: "Algo salio mal 703",
+            data: {}
+        });
+    }
+}
+
+export async function borrarProductosCarrito(req, res) {
+    const {id_comprador } = req.body;
+    try {
+        const numRowDelete = await Carrito.destroy({
+            where: {
+                 id_comprador 
+            }
+        });
         console.log(numRowDelete)
+        if (numRowDelete) {
+            return res.json({
+                mensaje: 'Carrito eliminado',
+                data: numRowDelete
+            })
+        } else {
+            return res.json({
+                mensaje: 'Carrito no eliminado',
+                data: {}
+            })
+        }
         return res.json(numRowDelete);
     } catch (e) {
         console.log(e);

@@ -14,8 +14,6 @@ import Estrellas from './estrellas'
 class DetalleProducto extends Component {
     constructor(props) {
         super(props);
-
-        console.log(props)
         const idUsuario = localStorage.getItem("id")
         this.state = {
             match: props.match.params.id,
@@ -32,7 +30,8 @@ class DetalleProducto extends Component {
             cantidad: 1,
             cargando: true,
             idUsuario,
-            alert: false
+            alert: false,
+            cantidad_carrito: 0
 
 
         };
@@ -43,23 +42,43 @@ class DetalleProducto extends Component {
     anadirCarrito() {
         const mensaje = {
             id_producto: this.state.idProducto,
-            cantidad: this.state.cantidad,
+            cantidad: parseInt(this.state.cantidad),
             id_comprador: this.state.idUsuario,
             id_vendedor: this.state.id_vendedor
         }
-        if(this.state.login){
-        if(mensaje.cantidad<=this.state.existencias && mensaje.cantidad>0){
-        console.log(mensaje)
-        axios.post('http://localhost:4000/carrito/registrarCarrito', mensaje)
-            .then((response) => {
-                this.setState({alert:true})
-            })
-        }else{
-            alert("Ha excedido la cantidad existente")
+        console.log("este es el mensaje", mensaje)
+        console.log(this.state.login)
+        if (this.state.login) {
+            console.log("entroooooooooooooooooooooooo")
+            axios.post('http://localhost:4000/carrito/buscarUnProductoCarrito', mensaje)
+                .then((response) => {
+                    console.log(response.data)
+                    if (response.data.mensaje === "Producto encontrado") {
+                        this.setState({ cantidad_carrito: response.data.data.cantidad })
+                        console.log("Esta es la cantidad en el carrito", this.state.cantidad_carrito)
+                    }else{
+                        this.setState({cantidad_carrito: 0})
+                    }
+                    
+                    if (mensaje.cantidad <= this.state.existencias && mensaje.cantidad > 0
+                        && (mensaje.cantidad + this.state.cantidad_carrito) <= this.state.existencias) {
+        
+                        axios.post('http://localhost:4000/carrito/registrarCarrito', mensaje)
+                        .then((response) => {
+                            
+                                this.setState({ alert: true })
+                            })
+                    } else {
+                        alert("Ha excedido la cantidad existente")
+                    }
+
+                })
+           
+
+            
+        } else {
+            alert("Debe iniciar sesión")
         }
-    }else{
-        alert("Debe iniciar sesión")
-    }
     }
 
     handleOnchange = input => e => {
@@ -70,7 +89,7 @@ class DetalleProducto extends Component {
         axios.post(`http://localhost:4000/producto/consultarProducto/${this.props.match.params.id}`)
             .then((response) => {
                 if (response.data.mensaje === "consulta exitosa") {
-                    console.log(response.data.data)
+                   
                     this.setState({ idProducto: response.data.data[0].id });
                     this.setState({ nombre: response.data.data[0].nombre });
                     this.setState({ imagen: response.data.data[0].imagen });
@@ -118,70 +137,71 @@ class DetalleProducto extends Component {
         } else {
             return (
                 <div>
+                    <Header />
                     {this.mostrarAlerta()}
-                <div className="section">
-                    
-                    <div className="container">
-                        <div className="row">
-                            <Col md={1}>
-                            </Col>
-                            <Col md={5}>
-                                <div className="product-preview">
-                                    <img src={`http://localhost:4000/uploads/${this.state.imagen}`} alt="" />
-                                </div>
+                    <div className="section">
 
-                            </Col>
-
-                            <div className="col-md-5">
-                                <div className="product-details">
-                                    <h2 className="product-name">{this.state.nombre}</h2>
-                                    <div>
-
-                                        <Estrellas calificacion={this.state.calificacion} />
-
-                                        <a className="review-link" href="#">{this.state.calificacion}/5 Añade tu calificacion</a>
-                                    </div>
-                                    <div>
-                                        <h3 className="product-price">{"$" + this.state.precio} 
-                                            {/* <del className="product-old-price">$990.00</del> */}
-                                        </h3>
-                                        <span className="product-available">Disponible</span>
+                        <div className="container">
+                            <div className="row">
+                                <Col md={1}>
+                                </Col>
+                                <Col md={5}>
+                                    <div className="product-preview">
+                                        <img src={`http://localhost:4000/uploads/${this.state.imagen}`} alt="" />
                                     </div>
 
+                                </Col>
 
-                                    <div className="input-vendedor">
-                                        Vendedor
-                                    <div className="input-v">
-                                            <input type="text" />
+                                <div className="col-md-5">
+                                    <div className="product-details">
+                                        <h2 className="product-name">{this.state.nombre}</h2>
+                                        <div>
+
+                                            <Estrellas calificacion={this.state.calificacion} />
+
+                                            <a className="review-link" href="#">{this.state.calificacion}/5 Añade tu calificacion</a>
                                         </div>
-                                    </div>
-                                    <div className="add-to-cart">
-                                        <div className="qty-label">
-                                            Cantidad
-									<div className="input-number">
-                                                <input type="number" id="cantidad" min="1"
-                                                    value={this.state.cantidad}
-                                                    onChange={this.handleOnchange('cantidad')} />
+                                        <div>
+                                            <h3 className="product-price">{"$" + this.state.precio}
+                                                {/* <del className="product-old-price">$990.00</del> */}
+                                            </h3>
+                                            <span className="product-available">Disponible</span>
+                                        </div>
+
+
+                                        <div className="input-vendedor">
+                                            Vendedor
+                                    <div className="input-v">
+                                                <input type="text" />
                                             </div>
                                         </div>
-                                        <button className="add-to-cart-btn" onClick={this.anadirCarrito}><i className="fa fa-shopping-cart"></i>Añadir al carrito</button>
+                                        <div className="add-to-cart">
+                                            <div className="qty-label">
+                                                Cantidad
+									<div className="input-number">
+                                                    <input type="number" id="cantidad" min="1"
+                                                        value={this.state.cantidad}
+                                                        onChange={this.handleOnchange('cantidad')} />
+                                                </div>
+                                            </div>
+                                            <button className="add-to-cart-btn" onClick={this.anadirCarrito}><i className="fa fa-shopping-cart"></i>Añadir al carrito</button>
+
+                                        </div>
+
+                                        <ul className="product-links">
+                                            <li>Categoria:</li>
+                                            <li><a href="#">{this.state.categoria}</a></li>
+                                        </ul>
+
 
                                     </div>
-
-                                    <ul className="product-links">
-                                        <li>Categoria:</li>
-                                        <li><a href="#">{this.state.categoria}</a></li>
-                                    </ul>
-
-
                                 </div>
-                            </div>
 
-                            <Detalle {...detalless} />
-                            
+                                <Detalle {...detalless} />
+
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
 
             )

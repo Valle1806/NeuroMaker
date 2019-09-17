@@ -26,3 +26,4 @@ export const Detalle_venta = sequelize.define('detalle_venta', {
     freezeTableName: true,
     timestamps: false
 })
+export default Detalle_venta;

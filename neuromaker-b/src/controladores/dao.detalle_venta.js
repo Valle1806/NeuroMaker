@@ -1,16 +1,12 @@
 import Detalle from '../modelos/detalle_venta'
 
 export async function registrarDetalle(req, res) {
-    const {
-        id_venta,
-        id_vendedor,
-        id_producto,
-        cantidad
-    } = req.body
+    
+    var productos= req.body
+
     try {
-        let newDetalle = await Detalle.create({
-            attributes: ['id_venta','id_vendedor','id_producto','cantidad'],
-        })
+        let newDetalle =Detalle.bulkCreate(productos,  
+            {fields: ['cantidad','id_producto','id_vendedor','id_venta',]},{returning: true})
         if (newDetalle) {
             return res.json({
                 mensaje: 'Detalle de venta registrado',
@@ -24,7 +20,6 @@ export async function registrarDetalle(req, res) {
             data: {}
         })
     }
-    res.send('recibido')
 }
 
 export async function consultarDetalle(req, res) {

@@ -25,3 +25,4 @@ export const Venta = sequelize.define('venta',{
 
 Venta.hasMany(Detalle_venta,{foreignKey:'id_venta'})
 Venta.hasMany(Envio,{foreignKey:'id_venta'})
+export default Venta;

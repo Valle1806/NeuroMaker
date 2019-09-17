@@ -92,7 +92,7 @@ class App extends Component {
                         <Route path="/detalle/:id" render={() => (
                             <div>
                                 <Fade in={true}>
-                                    <Header />
+                                    
                                     <DetalleProducto login={this.state.clienteLogueado} />
                                     <Footer />
                                 </Fade>

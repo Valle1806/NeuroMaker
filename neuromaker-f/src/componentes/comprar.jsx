@@ -1,25 +1,22 @@
 import React from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Label , CustomInput} from 'reactstrap';
 import axios from 'axios'
+import ModalEnvio from './envio'
 
 class ModalPagar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false,
             id_comprador: '',
-            usuario: {}
-
+            usuario: {},
+            productos: this.props.productos,
+            modal: false
         };
-
-        this.toggle = this.toggle.bind(this);
+        this.crearVenta=this.crearVenta.bind(this)
+        this.toggle=this.toggle.bind(this)
     }
 
-    toggle() {
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
-    }
+  
     componentWillMount(){
         const id_comprador= localStorage.getItem("id")
         const mensaje={
@@ -34,70 +31,114 @@ class ModalPagar extends React.Component {
         }).catch((error) => {
             alert('Error de registro de Producto')
         })
+        
+       
     }
     crearVenta(){
+       
         const mensaje={
             id_comprador: this.state.id_comprador
         }
         axios.post('http://localhost:4000/venta/registrarVenta',mensaje)
         .then((response) => {
             if (response.data.mensaje === "Venta creada con exito") {
-            
+                var productosAux=this.props.productos
+
+                for(var i=0; i<productosAux.length; i++){
+                    productosAux[i]['id_venta']= response.data.data.id;
+                }
+                axios.post('http://localhost:4000/detalle_venta/registrarDetalle',productosAux).then((response)=>{
+                    if(response.data.mensaje === "Detalle de venta registrado"){
+                 
+                        var productosNormales= this.props.productosNormales
+                        console.log("NIOOOOO",productosNormales)
+                        console.log(productosAux)
+                        for(var i=0; i<productosNormales.length; i++){
+                            if(productosNormales[i].existencias!=0){
+                           productosNormales[i].existencias= productosNormales[i].existencias-productosAux[i].cantidad
+                        }
+                        }
+                        axios.post('http://localhost:4000/producto/restarCantidadVentaProducto',productosNormales).then((response)=>{
+                            if(response.data.mensaje === "Existencia actualizada"){
+                                console.log("actualizo existencia")
+                            
+                                axios.post('http://localhost:4000/carrito/borrarProductosCarrito',mensaje)
+                                .then((response) => {
+                                    if(response.data.mensaje === "Carrito eliminado"){
+                                        console.log("Elimino productos carrito")
+                                        this.props.toggle()
+                                        this.toggle()
+                                    }
+                                })
+                            }
+
+                        })
+                    }
+                }).catch((error) => {
+                alert('Error de venta, intentelo mas tarde')
+        }) 
+                
             }
         }).catch((error) => {
             alert('Error de registro de Producto')
         }) 
     }
+    
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
+    
  
     render() {
         return (
             <div >
-                <a  color="danger" onClick={this.toggle}>Comprar  <i className="fa fa-arrow-circle-right"></i></a>
-                <Modal isOpen={this.state.modal} toggle={this.toggle} className="modal-lg" >
-                 <ModalHeader toggle={this.toggle}>Detalle pedido y facturación</ModalHeader>
+                <Modal isOpen={this.props.modal} toggle={this.props.toggle} className="modal-lg" >
+                 <ModalHeader toggle={this.props.toggle}>Detalle pedido y facturación</ModalHeader>
                     <ModalBody>
 
-                        <div class="row">
+                        <div className="row">
 
-                            <div class="col-md-5">
-                                <div class="billing-details">
-                                    <div class="section-title">
-                                        <h3 class="title">Detalles de pedido</h3>
+                            <div className="col-md-5">
+                                <div className="billing-details">
+                                    <div className="section-title">
+                                        <h3 className="title">Detalles de pedido</h3>
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                         <Label for="nombre">Nombre*</Label>
-                                        <input class="input" type="text" name="nombre" placeholder="Nombre" value={this.state.usuario.nombre}/>
+                                        <input className="input" type="text" name="nombre" placeholder="Nombre" defaultValue={this.state.usuario.nombre} disabled/>
                                     </div>
                                     
-                                    <div class="form-group">
+                                    <div className="form-group">
                                          <Label for="correo">Correo*</Label>
-                                        <input class="input" type="email" name="correo" placeholder="Correo electronico" value={this.state.usuario.correo} />
+                                        <input className="input" type="email" name="correo" placeholder="Correo electronico" defaultValue={this.state.usuario.correo} />
                                     </div>
-                                    <div class="form-group">
+                                    <div className="form-group">
                                          <Label for="cod_postal">Cíodigo Postal*</Label>
-                                        <input class="input" type="text" name="cod_postal" placeholder="Codigo postal"value={this.state.usuario.codigo_postal} />
+                                        <input className="input" type="text" name="cod_postal" placeholder="Codigo postal" defaultValue={this.state.usuario.codigo_postal} />
                                     </div>
-                                    <div class="form-group">
-                                    <Label for="tarjeta">Número tarjeta*</Label>
-                                        <input class="input" type="numero" name="tarjeta" placeholder="Numero de tarjeta" value={this.state.usuario.tarjeta} />
+                                    <div className="form-group">
+                                        <Label for="tarjeta">Número tarjeta*</Label>
+                                        <input className="input" type="numero" name="tarjeta" placeholder="Numero de tarjeta" defaultValue={this.state.usuario.tarjeta} />
                                     </div>
                                     
 
                                 </div>
                                 </div>
-                                <div class="col-md-7 order-details">
-                                    <div class="section-title text-center">
-                                        <h3 class="title">Tu orden</h3>
+                                <div className="col-md-7 order-details">
+                                    <div className="section-title text-center">
+                                        <h3 className="title">Tu orden</h3>
                                     </div>
-                                    <div class="order-summary">
-                                        <div class="order-col">
-                                            <div><strong>PRODUCT</strong></div>
+                                    <div className="order-summary">
+                                        <div className="order-col">
+                                            <div><strong>PRODUCTO</strong></div>
                                             <div><strong>TOTAL</strong></div>
                                         </div>
-                                        <div class="order-products">
+                                        <div className="order-products">
                                         {this.props.productos.map(indice => (
-                                        <div class="order-col" key={indice.id_producto}>
-                                                 <div>{indice.cantidad}x {indice.nombre}</div>
+                                        <div className="order-col" key={indice.id_producto}>
+                                                 <div>{indice.cantidad}x {indice.nombre}</div><div className="iscompra">{this.props.sePuedeComprar ? "":indice.existencia}</div>
                                            <div>{indice.costo}</div>
                                         </div>
                                             ))}
@@ -105,19 +146,18 @@ class ModalPagar extends React.Component {
                                             
                                         </div>
                                        
-                                        <div class="order-col">
+                                        <div className="order-col">
                                             <div><strong>TOTAL</strong></div>
-                                            <div><strong class="order-total">${this.props.total}</strong></div>
+                                            <div><strong className="order-total">${this.props.total}</strong></div>
                                         </div>
                                     </div>
-                                    <div class="input-checkbox">
-                                    <input type="checkbox" id="terms" />
-                                    <label for="terms">
-                                        <span></span>
-                                        I've read and accept the <a href="#">terms & conditions</a>
-                                    </label>
-                                </div>
-                                <a href="#" class="primary-btn order-submit">Realizar pedido</a>
+                                    <CustomInput type="checkbox" id="exampleCustomCheckbox" >
+                                    he leído y acepto los <a href="#">terms & conditions</a>
+						        	</CustomInput>
+                                    {this.props.sePuedeComprar ?                         
+                                <a onClick={this.crearVenta}className="primary-btn order-submit">Realizar pedido</a>
+                            : <div><br></br>Ha excedido existencias en algun producto, corrige y vuelve a intentar</div>
+                            }
                                 </div>
                               
                             
@@ -125,10 +165,13 @@ class ModalPagar extends React.Component {
 
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggle}>Do Something</Button>{' '}
-                        <Button color="secondary" onClick={this.toggle}>Cancel</Button>
+                   
+                        <Button color="secondary" onClick={this.props.toggle}>Cancelar</Button>:
+                        
+                
                     </ModalFooter>
                 </Modal>
+                <ModalEnvio modal={this.state.modal} toggle={this.toggle}/>
             </div>
         );
     }

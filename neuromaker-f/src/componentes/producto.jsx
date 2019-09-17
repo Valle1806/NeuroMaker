@@ -5,6 +5,8 @@ import Estrellas from './estrellas'
 const Producto = (props) =>{
     
     return(
+
+        
         
     <div className="product" >
         
@@ -13,7 +15,11 @@ const Producto = (props) =>{
                 <div className="product-label">
                     {//<span className="sale">-30%</span>
                     }
-                    <span className="new">NEW</span>
+                    {props.producto.cantidad==0 ?
+                    <span className="agotado">Agotado</span>:
+                    <span className="new">Nuevo </span>
+                    
+                    }
                 </div>
             </div>
             <div className="product-body">

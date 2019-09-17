@@ -47,6 +47,70 @@ export async function publicarProducto(req, res) {
     res.send('recibido');
 }
 
+
+export async function restarCantidadVentaProducto(req, res) {
+    const varr= req.body;
+    
+    try {
+
+        let newDetalle =Producto.bulkCreate(varr  
+        ,{  updateOnDuplicate:['existencias']})
+        console.log(newDetalle)
+     if (newDetalle) {
+         return res.json({
+             mensaje: 'Existencia actualizada',
+             data: newDetalle
+         })
+     }else{
+        return res.json({
+            mensaje: 'Existencia actualizada',
+            data: newDetalle
+        })
+     }
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            mensaje: 'Error no detectado',
+            data: {}
+        })
+    }
+
+    
+}
+
+export async function consultarCantidadVentaProducto(req, res) {
+    const {ids }= req.body;
+    
+    try {
+
+        const busquedaCantidad = await Producto.findAll({
+           
+            where: {
+              id: ids
+            }
+        });
+        if(busquedaCantidad){
+            return res.json({
+                mensaje: 'Productos encontrados',
+                data: busquedaCantidad
+            })
+        }else{
+            return res.json({
+                mensaje: 'Productos encontrados',
+                data: {}
+            })
+        }
+    } catch (error) {
+        console.log(error);
+        return res.json({
+            mensaje: 'Error no detectado',
+            data: {}
+        })
+    }
+
+    
+}
+
 export async function consultarProductos(req, res) {
     const {
         id,
