@@ -18,6 +18,23 @@ main{
   text-align: center;
 }
 
+.seccionTabla{
+  margin: 40px auto;
+  width: 60%;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgb(230, 230, 230) ;
+}
+
+.tablaRegistro{
+  background: rgb(245, 245, 245) ;
+  border-radius: 5px;
+}
+
+.tituloTabla{
+  font-weight: bold;
+}
+
 .formulario{
   position: relative;
   background: #fff;

@@ -40,6 +40,12 @@ export default class MenuEmergente extends React.Component {
             <Link to={"/actualizar"}>
             <DropdownItem >Perfil</DropdownItem>
             </Link>
+            <Link to={"/compras"}>
+            <DropdownItem >Compras</DropdownItem>
+            </Link>
+            <Link to={"/ventas"}>
+            <DropdownItem >Ventas</DropdownItem>
+            </Link>
             <Link to={"/"}  >
               <DropdownItem onClick={this.cerrarCesion}>Cerrar Sesión</DropdownItem>
             </Link>

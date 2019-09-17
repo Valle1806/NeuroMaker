@@ -12,6 +12,8 @@ import axios from 'axios'
 import Footer from './componentes/footer';
 import BuscarPCategorias from './componentes/buscarPCategoria'
 import PublicarProducto from './componentes/publicarProducto'
+import HistorialDeCompras from './componentes/historialDeCompras'
+import HistorialDeVentas from './componentes/historialDeVentas';
 
 //En esta parte renderizamos lo prinipal
 class App extends Component {
@@ -76,6 +78,30 @@ class App extends Component {
             <div className="App" >
                 <BrowserRouter>
                     <Switch>
+                    <Route path="/ventas" render={()=>
+                        this.state.clienteLogueado ?
+                        (
+                            <div>
+                                <Fade in={true}>
+                                    <Header/>
+                                    <HistorialDeVentas/>
+                                    <Footer/>
+                                </Fade>
+                            </div>
+                        ):<Redirect to="/login" />}
+                        />
+                        <Route path="/compras" render={()=>
+                        this.state.clienteLogueado ?
+                        (
+                            <div>
+                                <Fade in={true}>
+                                    <Header/>
+                                    <HistorialDeCompras/>
+                                    <Footer/>
+                                </Fade>
+                            </div>
+                        ):<Redirect to="/login" />}
+                        />
                     <Route path="/publicarProducto" render={()=>
                         this.state.clienteLogueado ?
                         (
