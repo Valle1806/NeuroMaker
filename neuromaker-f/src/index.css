@@ -539,8 +539,8 @@ textarea.input {
 }
 
 .product .product-img .product-label>span.agotado {
-  background-color: #D10024;
-  border-color: #D10024;
+  background-color: rgb(80, 73, 74);
+  border-color: rgb(80, 73, 74);
   color: #FFF;
 }
 .product .product-body {
